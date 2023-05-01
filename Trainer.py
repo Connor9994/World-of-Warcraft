@@ -6,12 +6,29 @@ import numpy as np
 import matplotlib.pyplot as plt
 import os
 from PIL import ImageChops
+from PIL import ImageTk, Image
+from tkinter import *
 import math
 import operator
 import functools
-import tkinter as tk
 import wave
 import random
+import configparser
+import win32gui
+
+# create the window
+root = Tk()
+root.resizable(False, False)
+root.title("Bobber")
+os.chdir(os.getcwd())
+my_img = ImageTk.PhotoImage(Image.open(r"BobberWatcher.png"))
+my_label = Label(image=my_img)
+my_label.pack()
+root.mainloop()
+
+#Bring WoW Client to the Foreground
+app_handle = win32gui.FindWindow(None, "World of Warcraft")
+win32gui.SetForegroundWindow(app_handle)
 
 # Root-Mean-Squared Difference Function
 # https://gist.github.com/sente/ea44cf014c5776a1a5bf
@@ -42,6 +59,20 @@ TimeElapsed = time.time()
 
 # Loop until broken
 while True:
+    config = configparser.ConfigParser()
+    config.read('config.ini')
+    BobberName = config.get('Screen', 'BobberName')
+    ScreenXStart = config.getint('Screen', 'ScreenXStart')
+    ScreenYStart = config.getint('Screen', 'ScreenYStart')
+    ScreenXForScreenshot = config.getint('Screen', 'ScreenXForScreenshot')
+    ScreenYForScreenshot = config.getint('Screen', 'ScreenYForScreenshot')
+    FishingPoleX = config.getint('Screen', 'FishingPoleX')
+    FishingPoleY = config.getint('Screen', 'FishingPoleY')
+    AFKXMin = config.getint('Screen', 'AFKXMin')
+    AFKYMin = config.getint('Screen', 'AFKYMin')
+    AFKXMax = config.getint('Screen', 'AFKXMax')
+    AFKYMax = config.getint('Screen', 'AFKYMax')
+    
     try:
         baitBreakout = 0
         if (time.time() - LastBait > 600):
@@ -49,7 +80,7 @@ while True:
             LastBait = time.time()
             autoit.send("2")
             time.sleep(2)
-            image = pyautogui.screenshot(region=(0, 0, 1920, 1080))
+            image = pyautogui.screenshot(region=(ScreenXStart, ScreenYStart, ScreenXForScreenshot,ScreenYForScreenshot))
             image.save("Screen.png")
             Screen = cv2.imread("Screen.png")
             Bait = cv2.imread("Bait.png")
@@ -63,7 +94,7 @@ while True:
                     print("Found bait at (" + str(BaitX) + "," + str(BaitY) + ")")
                     autoit.mouse_move(BaitX, BaitY)
                     autoit.mouse_click("right")
-                    autoit.mouse_click("left",1116, 187)
+                    autoit.mouse_click("left",FishingPoleX, FishingPoleY)
                     time.sleep(3)
             autoit.send("2")
             autoit.send("1")
@@ -74,7 +105,7 @@ while True:
         if (time.time() - LastFish > 300):
             print("Fish Expired")
             LastFish = time.time()
-            image = pyautogui.screenshot(region=(0, 0, 1920, 1080))
+            image = pyautogui.screenshot(region=(ScreenXStart, ScreenYStart, ScreenXForScreenshot,ScreenYForScreenshot))
             image.save("Screen.png")
             Screen = cv2.imread("Screen.png")
             Fish = cv2.imread("Fish.png")
@@ -98,7 +129,7 @@ while True:
         if (time.time() - LastBeer > 180):
             print("Beer Expired")
             LastBeer = time.time()
-            image = pyautogui.screenshot(region=(0, 0, 1920, 1080))
+            image = pyautogui.screenshot(region=(ScreenXStart, ScreenYStart, ScreenXForScreenshot,ScreenYForScreenshot))
             image.save("Screen.png")
             Screen = cv2.imread("Screen.png")
             Beer = cv2.imread("Beer.png")
@@ -119,15 +150,15 @@ while True:
             print("Time exceded fishing timer")
             LastCast = time.time()
             autoit.send("1")
-            autoit.mouse_move(random.randint(300,600),random.randint(300,600))
+            autoit.mouse_move(random.randint(AFKXMin,AFKXMax),random.randint(AFKYMin,AFKXMin))
             time.sleep(1)
 
         # Screenshot right monitor
-        image = pyautogui.screenshot(region=(0, 0, 1920, 1080))
+        image = pyautogui.screenshot(region=(ScreenXStart, ScreenYStart, ScreenXForScreenshot, ScreenYForScreenshot))
         image.save("Screen.png")
 
         # Import Bobber + Entire Screen
-        Bobber = cv2.imread("Bobber.png")
+        Bobber = cv2.imread(BobberName)
         Screen = cv2.imread("Screen.png")
 
         # Use the OpenCV function matchTemplate() to search for matches between an image patch and an input image
@@ -147,7 +178,7 @@ while True:
                         print("Time exceded fishing timer")
                         LastCast = time.time()
                         autoit.send("1")
-                        autoit.mouse_move(random.randint(300,600),random.randint(300,600))
+                        autoit.mouse_move(random.randint(AFKXMin,AFKXMax),random.randint(AFKYMin,AFKYMax))
                         time.sleep(1)
                         break
 
@@ -174,12 +205,12 @@ while True:
                         print("Splash")
                         autoit.mouse_click("right", BobberX+25, BobberY+25)
                         autoit.send("1")
-                        autoit.mouse_move(random.randint(300,600),random.randint(300,600))
+                        autoit.mouse_move(random.randint(AFKXMin,AFKXMax),random.randint(AFKYMin,AFKYMax))
                         time.sleep(1)
                         break
 
                     if (ImageDifferenceLast < 5):
-                        #Find a better 
+                        #Find a better angle
                         break
                 Length = 1
 
