@@ -39,7 +39,7 @@ def window():
     my_label.pack()
     root.mainloop()
 
-def  v:
+def change_img():
    img2=ImageTk.PhotoImage(Im.open(r"BobberWatcher.png"))
    label= Label(root,image= img2)
    #label.configure(image=img2)
