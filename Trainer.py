@@ -3,47 +3,16 @@ import time
 import pyautogui
 import cv2
 import numpy as np
-import matplotlib.pyplot as plt
 import os
 import math
 import operator
 import functools
-import wave
 import random
 import configparser
 import win32gui
 from PIL import ImageTk, ImageChops
 from PIL import Image as Im
 from tkinter import *
-import threading
-
-# multi-threading example
-import threading
-root = Tk()
-
-def window():
-    config = configparser.ConfigParser()
-    config.read('config.ini')
-    BobberName = config.get('Screen', 'BobberName')
-    root.resizable(False, False)
-    root.title("Bobber")
-    root.attributes("-topmost", True)
-    Bobber = cv2.imread(BobberName)
-    w, h = Bobber.shape[:-1]
-    x = config.getint('Screen', 'BobberPreviewLocationX')
-    y = config.getint('Screen', 'BobberPreviewLocationY')
-    root.geometry(str(w+15) + 'x' + str(h+15) + '+' + str(x) + '+' + str(y))
-    os.chdir(os.getcwd())
-    my_img = ImageTk.PhotoImage(Im.open(r"BobberWatcher.png"))
-    my_label = Label(image=my_img)
-    my_label.pack()
-    root.mainloop()
-
-# create thread
-t = threading.Thread(target=window)
-
-# start thread
-t.start()
 
 #Bring WoW Client to the Foreground
 app_handle = win32gui.FindWindow(None, "World of Warcraft")
@@ -246,6 +215,4 @@ def Main():
         except Exception as e:
             print(e)   
 
-# create thread
-t2 = threading.Thread(target=Main)
-t2.start()
+Main()
