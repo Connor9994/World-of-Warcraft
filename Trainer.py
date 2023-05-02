@@ -46,7 +46,7 @@ def Main():
     # Loop until broken
     while True:
         config = configparser.ConfigParser()
-        config.read('config.ini')
+        config.read('..\Config\config.ini')
         BobberName = config.get('Screen', 'BobberName')
         ScreenXStart = config.getint('Screen', 'ScreenXStart')
         ScreenYStart = config.getint('Screen', 'ScreenYStart')
