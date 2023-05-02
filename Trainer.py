@@ -18,12 +18,6 @@ from tkinter import *
 app_handle = win32gui.FindWindow(None, "World of Warcraft")
 win32gui.SetForegroundWindow(app_handle)
 
-def change_img():
-   img2=ImageTk.PhotoImage(Im.open(r"BobberWatcher.png"))
-   label= Label(root,image= img2)
-   #label.configure(image=img2)
-   #label.image=img2
-
 # Root-Mean-Squared Difference Function
 # https://gist.github.com/sente/ea44cf014c5776a1a5bf
 
@@ -68,6 +62,11 @@ def Main():
         BaitOn = config.getint('Fishing Prep', 'BaitOn')
         BeerOn = config.getint('Fishing Prep', 'BeerOn')
         FishOn = config.getint('Fishing Prep', 'FishOn')
+        BobberSensitivity = config.getfloat('Sensitivity', 'BobberSensitivity')
+        BaitSensitivity = config.getfloat('Sensitivity', 'BaitSensitivity')
+        BeerSensitivity = config.getfloat('Sensitivity', 'BeerSensitivity')
+        FishSensitivity = config.getfloat('Sensitivity', 'FishSensitivity')
+        ImageDifferenceLastSensitivity = config.getint('Sensitivity', 'ImageDifferenceLastSensitivity')
         
         try:
             baitBreakout = 0
@@ -81,7 +80,7 @@ def Main():
                 Screen = cv2.imread("Screen.png")
                 Bait = cv2.imread("Bait.png")
                 res2 = cv2.matchTemplate(Screen, Bait, cv2.TM_CCOEFF_NORMED)
-                loc2 = np.where(res2 >= .6)
+                loc2 = np.where(res2 >= BaitSensitivity)
                 for pt in zip(*loc2[::-1]):
                     if (baitBreakout == 0):
                         BaitX = pt[0] + 25
@@ -106,7 +105,7 @@ def Main():
                 Screen = cv2.imread("Screen.png")
                 Fish = cv2.imread("Fish.png")
                 res2 = cv2.matchTemplate(Screen, Fish, cv2.TM_CCOEFF_NORMED)
-                loc2 = np.where(res2 >= .7)
+                loc2 = np.where(res2 >= FishSensitivity)
                 for pt in zip(*loc2[::-1]):
                     if(fishBreakout == 0):
                         FishX = pt[0] + 25
@@ -130,7 +129,7 @@ def Main():
                 Screen = cv2.imread("Screen.png")
                 Beer = cv2.imread("Beer.png")
                 res2 = cv2.matchTemplate(Screen, Beer, cv2.TM_CCOEFF_NORMED)
-                loc2 = np.where(res2 >= .7)
+                loc2 = np.where(res2 >= BeerSensitivity)
                 for pt in zip(*loc2[::-1]):
                     if(beerBreakout == 0):
                         BeerX = pt[0] + 25
@@ -159,7 +158,7 @@ def Main():
 
             # Use the OpenCV function matchTemplate() to search for matches between an image patch and an input image
             res1 = cv2.matchTemplate(Screen, Bobber, cv2.TM_CCOEFF_NORMED)
-            loc1 = np.where(res1 >= .5)  
+            loc1 = np.where(res1 >= BobberSensitivity)
 
             Length = 0
             for pt in zip(*loc1[::-1]):
@@ -196,7 +195,7 @@ def Main():
                             ImageDifferenceLast = rmsdiff(im1, im2)
                             print(ImageDifferenceLast)
                         
-                        if (ImageDifferenceLast > 25):
+                        if (ImageDifferenceLast > ImageDifferenceLastSensitivity):
                             LastCast = time.time()
                             print("Splash")
                             autoit.mouse_click("right", BobberX+25, BobberY+25)
