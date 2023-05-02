@@ -10,7 +10,7 @@ import functools
 import random
 import configparser
 import win32gui
-from PIL import ImageTk, ImageChops
+from PIL import ImageChops
 from PIL import Image as Im
 from tkinter import *
 
