@@ -39,12 +39,6 @@ def window():
     my_label.pack()
     root.mainloop()
 
-def change_img():
-   img2=ImageTk.PhotoImage(Im.open(r"BobberWatcher.png"))
-   label= Label(root,image= img2)
-   #label.configure(image=img2)
-   #label.image=img2
-
 # create thread
 t = threading.Thread(target=window)
 
@@ -54,6 +48,12 @@ t.start()
 #Bring WoW Client to the Foreground
 app_handle = win32gui.FindWindow(None, "World of Warcraft")
 win32gui.SetForegroundWindow(app_handle)
+
+def change_img():
+   img2=ImageTk.PhotoImage(Im.open(r"BobberWatcher.png"))
+   label= Label(root,image= img2)
+   #label.configure(image=img2)
+   #label.image=img2
 
 # Root-Mean-Squared Difference Function
 # https://gist.github.com/sente/ea44cf014c5776a1a5bf
@@ -76,9 +76,6 @@ def Main():
 
     # Start a timer
     LastBeer = time.time() - 180
-
-    # Start a timer
-    #LastClear = time.time() - 3600
 
     # Start a timer
     TimeElapsed = time.time()
