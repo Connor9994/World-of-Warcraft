@@ -1,0 +1,65 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+	<Script file="ZygorMapIcon.lua"/>
+	<Button name="ZygorGuidesViewerMapIcon" movable="true" parent="Minimap" frameStrata="MEDIUM" hidden="true" mixin="ZygorGuidesViewerMapIcon_Mixin">
+		<Size><AbsDimension x="32" y="32"/></Size>
+		<Anchors><Anchor point="CENTER" relativePoint="BOTTOMLEFT"><Offset><AbsDimension x="16" y="16"/></Offset></Anchor></Anchors>
+
+		<Layers>
+			<!--
+			<Layer level="BACKGROUND">
+				<Texture name="$parentBack" file="(zglogo-back)" parentKey="back">
+					<Size><AbsDimension x="27" y="27"/></Size>
+					<Anchors><Anchor point="CENTER" relativePoint="CENTER"><Offset><AbsDimension x="1" y="1"/></Offset></Anchor></Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY" textureSubLevel="1">
+				<Texture name="$parentOverlay" file="Interface\Minimap\MiniMap-TrackingBorder">
+					<Size><AbsDimension x="52" y="52"/></Size>
+					<Anchors><Anchor point="CENTER" relativePoint="CENTER"><Offset><AbsDimension x="11" y="-11"/></Offset></Anchor></Anchors>
+				</Texture>
+			</Layer>
+			-->
+			<Layer level="OVERLAY" textureSubLevel="2">
+				<Texture file="$skins\loading" name="$parentSpinner" parentKey="spinner">
+					<Anchors><Anchor point="CENTER" relativePoint="CENTER" x="0.5" y="0" /></Anchors>
+					<Size x="32" y="32"/>
+				</Texture>
+			</Layer>
+		</Layers>
+
+		<Animations>
+			<AnimationGroup parentKey="Loop" looping="REPEAT">
+				<Rotation target="$parentSpinner" order="1" duration="2" degrees="-360" />
+			</AnimationGroup>
+		</Animations>
+
+		<NormalTexture file="(zglogo)" parentKey="ntx">
+			<Anchors><Anchor point="CENTER" relativePoint="CENTER"><Offset><AbsDimension x="1" y="0"/></Offset></Anchor></Anchors>
+			<Size><AbsDimension x="21" y="21"/></Size>
+			<TexCoords left="0.000" right="1.000" top="0.000" bottom="0.250"/>
+		</NormalTexture>
+
+		<PushedTexture file="(zglogo)" parentKey="ptx">
+			<Anchors><Anchor point="CENTER" relativePoint="CENTER"><Offset><AbsDimension x="1" y="0"/></Offset></Anchor></Anchors>
+			<Size><AbsDimension x="21" y="21"/></Size>
+			<TexCoords left="0.000" right="1.000" top="0.250" bottom="0.500"/>
+		</PushedTexture>
+
+		<HighlightTexture file="(zglogo)" alphaMode="ADD" parentKey="htx">
+			<Anchors><Anchor point="CENTER" relativePoint="CENTER"><Offset><AbsDimension x="1" y="0"/></Offset></Anchor></Anchors>
+			<Size><AbsDimension x="21" y="21"/></Size>
+			<TexCoords left="0.000" right="1.000" top="0.500" bottom="0.750"/>
+		</HighlightTexture>
+
+
+		<Scripts>
+			<OnClick method="OnClick" />
+			<OnDragStart method="OnDragStart"/>
+			<OnDragStop method="OnDragStop"/>
+			<OnUpdate method="OnUpdate"/>
+			<OnLoad method="OnLoad"/>
+			<OnEnter method="OnEnter"/>
+			<OnLeave method="OnLeave"/>
+		</Scripts>
+	</Button>
+</Ui>

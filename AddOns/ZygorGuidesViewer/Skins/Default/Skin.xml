@@ -1,0 +1,15 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/FrameXML/UI.xsd">
+
+	<Script file="ViewerFrame.lua"/>
+	<Include file="ViewerFrame.xml"/>
+
+	<Script file="Skin.lua"/>
+
+	<!--Styles -->
+	<Script file="Starlight\Style.lua"/>
+	<Script file="Starlight-glass\Style.lua"/>
+	<Script file="Stealth\Style.lua"/>
+	<Script file="Stealth-glass\Style.lua"/>
+
+	<!-- <Script file="Midnight\Style.lua"/> -->
+</Ui>

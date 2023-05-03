@@ -1,0 +1,18 @@
+## Interface: 100002
+## Notes: Wowhead Data dump for GatherMate2
+## Title: GatherMate2Data
+## Author: kagaro, Xinhuan
+## X-Category: Map
+## X-Email: sal.scotto@gmail.com
+## Version: v38.2
+## LoadOnDemand: 1
+## Dependencies: GatherMate2
+## X-Curse-Project-ID: 26737
+
+MiningData.lua
+HerbalismData.lua
+GasData.lua
+FishData.lua
+TreasureData.lua
+ArchaeologyData.lua
+GatherMateData.lua

@@ -1,0 +1,23 @@
+## Interface: 100007
+
+## Title: Leatrix Plus
+## Title-zhCN: Leatrix Plus [|cffeda55f功能百宝箱|r]
+## Title-zhTW: Leatrix Plus [|cffeda55f功能百寶箱|r]
+
+## Notes: Quality of life addon.
+## Notes-zhCN: 哆啦A梦的百宝袋
+## Notes-zhTW: 哆啦A夢的百寶袋
+
+## Version: 10.0.60
+## Author: Leatrix
+## SavedVariables: LeaPlusDB
+
+## OptionalDeps: Leatrix_enUS, ElvUI, Glass
+
+## X-Curse-Project-ID: 94855
+
+Leatrix_Plus_Library.lua
+Leatrix_Plus_Locale.lua
+Leatrix_Plus_Media.lua
+Leatrix_Plus_Mute.lua
+Leatrix_Plus.lua

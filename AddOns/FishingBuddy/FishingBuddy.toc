@@ -1,0 +1,38 @@
+## Interface: 100007
+## Title: Fishing Buddy
+## Version: 1.20.4
+## X-Curse-Project-ID: 15093
+## X-WoWI-ID: 4239
+## Notes: Help with fishing related tasks -- clothing, fish information, etc.
+## Notes-deDE: Erleichtert das Angeln - Ausrüstung und Fish-Infos
+## Notes-frFR: Vous facilite la vie de pecheur. Informations sur les poissons, changement d'habits, etc.
+## Notes-esES: Ayude con las tareas relacionadas pesca -- ropa, información de los pescados
+## Author: Sutorix=AT=hotmail.com
+## OptionalDeps: FB_Debugging, Outfitter, myAddOns, Titan
+## SavedVariables: FishingBuddy_Info
+## SavedVariablesPerCharacter: FishingBuddy_Player
+## X-Date: July 21, 2005
+## X-Help: FBConstants.HELPMSG
+Libs\Libs.xml
+locale\locale.xml
+FishingBuddy.xml
+FishingDatabase.lua
+FishingBuddyFrame.xml
+FishingOptionsFrame.lua
+FishingScrollMenu.xml
+FishingLocationsFrame.xml
+FishingOutfitManager.lua
+FishingOutfitter.xml
+FishingBuddyMinimap.lua
+FishingWatcher.xml
+FishingQuests.lua
+FishingGearManager.lua
+FishingExtravaganza.xml
+FishingRaid.xml
+FishingMacro.lua
+FishingSchools.lua
+FishingAbout.lua
+FishingPlans.lua
+FishingPlans\Plans.xml
+FishingFluff.lua
+FishingBuddyAPI.lua

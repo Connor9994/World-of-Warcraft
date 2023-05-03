@@ -1,0 +1,20 @@
+## Title: Auctioneer Util: |cff447722Appraiser
+## Notes: Shows price recommendations during sales.
+##
+## Interface: 100005
+## LoadOnDemand: 0
+## Dependencies: Stubby, Auctioneer
+## OptionalDependencies: !nLog, SlideBar, Configator, Babylonian, DebugLib, TipHelper, LibExtraTip, LibDataBroker
+## SavedVariables: AuctioneerUtilAppraiserData
+##
+## Version: 9.1.BETA.5.11 (OneMawTime)
+## Revision: $Id$
+## Author: Norganna's AddOns
+## X-Part-Of: Auctioneer
+## X-Category: Auction House
+## X-Max-Interface: 100005
+## X-URL: http://auctioneeraddon.com/
+## X-Feedback: https://auctioneeraddon.com/slack
+##
+
+Main.lua

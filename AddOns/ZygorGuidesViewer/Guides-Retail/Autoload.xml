@@ -1,0 +1,762 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+		<Script file="Images\Images.lua"/>
+	
+	<!-- INCLUDES -->
+		<!-- NEUTRAL -->
+		<Script file="Includes\Achievements\N_Achievements_Includes.lua"/>
+		<Script file="Includes\Dailies\N_Dailies_Includes.lua"/>
+		<Script file="Includes\General\N_General_Includes.lua"/>
+		<Script file="Includes\General\N_Quest_Includes.lua"/>
+		<Script file="Includes\Leveling\N_Garrisons_Includes.lua"/>
+		<Script file="Includes\PetsMounts\N_Mounts_Includes.lua"/>
+		<Script file="Includes\PetsMounts\N_Pets_Includes.lua"/>
+		<Script file="Includes\Professions\N_Professions_Includes.lua"/>
+		<Script file="Includes\Reputations\N_Reputation_Includes.lua"/>
+		<Script file="Includes\Titles\N_Titles_Includes.lua"/>
+
+		<!-- ALLIANCE -->
+		<Script file="Includes\Achievements\A_Achievements_Includes.lua"/>
+		<Script file="Includes\Dailies\A_Dailies_Includes.lua"/>
+		<Script file="Includes\General\A_General_Includes.lua"/>
+		<Script file="Includes\General\A_Quest_Includes.lua"/>
+		<Script file="Includes\Leveling\A_Garrisons_Includes.lua"/>
+		<Script file="Includes\Leveling\A_War_Campaign_Footholds_BFA.lua"/>
+		<Script file="Includes\PetsMounts\A_Mounts_Includes.lua"/>
+		<Script file="Includes\PetsMounts\A_Pets_Includes.lua"/>
+		<Script file="Includes\Professions\A_Professions_Includes.lua"/>
+		<Script file="Includes\Reputations\A_Reputation_Includes.lua"/>
+		<Script file="Includes\Titles\A_Titles_Includes.lua"/>
+
+		<!-- HORDE -->
+		<Script file="Includes\Achievements\H_Achievements_Includes.lua"/>
+		<Script file="Includes\Dailies\H_Dailies_Includes.lua"/>
+		<Script file="Includes\General\H_General_Includes.lua"/>
+		<Script file="Includes\General\H_Quest_Includes.lua"/>
+		<Script file="Includes\Leveling\H_Garrisons_Includes.lua"/>
+		<Script file="Includes\Leveling\H_War_Campaign_Footholds_BFA.lua"/>
+		<Script file="Includes\PetsMounts\H_Mounts_Includes.lua"/>
+		<Script file="Includes\PetsMounts\H_Pets_Includes.lua"/>
+		<Script file="Includes\Professions\H_Professions_Includes.lua"/>
+		<Script file="Includes\Reputations\H_Reputation_Includes.lua"/>
+		<Script file="Includes\Titles\H_Titles_Includes.lua"/>
+
+	<!-- LEVELING -->
+		<!-- CATA -->
+		<Script file="Leveling\ZygorLevelingAllianceCATA.lua"/>
+		<Script file="Leveling\ZygorLevelingAllianceCATATrial.lua"/>
+
+		<Script file="Leveling\ZygorLevelingHordeCATA.lua"/>
+		<Script file="Leveling\ZygorLevelingHordeCATATrial.lua"/>
+
+		<!-- MOP -->
+		<Script file="Leveling\ZygorLevelingPandaStarterMOP.lua"/>
+		<Script file="Leveling\ZygorLevelingPandaStarterMOPTrial.lua"/>
+
+		<Script file="Leveling\ZygorLevelingAllianceMOP.lua"/>
+		<Script file="Leveling\ZygorLevelingAllianceMOPTrial.lua"/>
+
+		<Script file="Leveling\ZygorLevelingHordeMOP.lua"/>
+		<Script file="Leveling\ZygorLevelingHordeMOPTrial.lua"/>
+
+		<!-- WOD -->
+		<Script file="Leveling\ZygorLevelingAllianceWOD.lua"/>
+		<Script file="Leveling\ZygorLevelingAllianceWODTrial.lua"/>
+		
+		<Script file="Leveling\GarrisonAllianceWOD.lua"/>
+		<Script file="Leveling\GarrisonAllianceWODTrial.lua"/>
+		
+		<Script file="Leveling\ZygorLevelingHordeWOD.lua"/>
+		<Script file="Leveling\ZygorLevelingHordeWODTrial.lua"/>
+
+		<Script file="Leveling\GarrisonHordeWOD.lua"/>
+		<Script file="Leveling\GarrisonHordeWODTrial.lua"/>
+
+		<!-- LEGION -->
+		<Script file="Leveling\ZygorLevelingAllianceLEGION.lua"/>
+		<Script file="Leveling\ZygorLevelingAllianceLEGIONTrial.lua"/>
+
+		<Script file="Leveling\ZygorLevelingHordeLEGION.lua"/>
+		<Script file="Leveling\ZygorLevelingHordeLEGIONTrial.lua"/>
+
+		<!-- BFA -->
+		<Script file="Leveling\ZygorLevelingAllianceBFA.lua"/>
+		<Script file="Leveling\ZygorLevelingAllianceBFATrial.lua"/>
+
+		<Script file="Leveling\ZygorLevelingHordeBFA.lua"/>
+		<Script file="Leveling\ZygorLevelingHordeBFATrial.lua"/>
+
+		<!-- SHADOWLANDS -->
+		<Script file="Leveling\ZygorLevelingAllianceSHADOW.lua"/>
+		<Script file="Leveling\ZygorLevelingAllianceSHADOWTrial.lua"/>
+
+		<Script file="Leveling\ZygorLevelingHordeSHADOW.lua"/>
+		<Script file="Leveling\ZygorLevelingHordeSHADOWTrial.lua"/>
+
+		<Script file="Leveling\ZygorLevelingCommonSHADOW.lua"/>
+		<Script file="Leveling\ZygorLevelingCommonSHADOWTrial.lua"/>
+
+		<!-- DRAGONFLIGHT -->
+
+		<Script file="Leveling\ZygorLevelingAllianceDRAGON.lua"/>
+		<Script file="Leveling\ZygorLevelingAllianceDRAGONTrial.lua"/>
+
+		<Script file="Leveling\ZygorLevelingHordeDRAGON.lua"/>
+		<Script file="Leveling\ZygorLevelingHordeDRAGONTrial.lua"/>
+
+		<Script file="Leveling\ZygorLevelingCommonDRAGON.lua"/>
+		<Script file="Leveling\ZygorLevelingCommonDRAGONTrial.lua"/>
+
+	<!-- DAILIES -->
+		<!-- CATA -->
+		<Script file="Dailies\ZygorDailiesAllianceCATA.lua"/>
+		<Script file="Dailies\ZygorDailiesAllianceCATATrial.lua"/>
+
+		<Script file="Dailies\ZygorDailiesHordeCATA.lua"/>
+		<Script file="Dailies\ZygorDailiesHordeCATATrial.lua"/>
+
+		<!-- MOP -->	
+		<Script file="Dailies\ZygorDailiesHordeMOP.lua"/>
+		<Script file="Dailies\ZygorDailiesHordeMOPTrial.lua"/>
+		
+		<Script file="Dailies\ZygorDailiesAllianceMOP.lua"/>
+		<Script file="Dailies\ZygorDailiesAllianceMOPTrial.lua"/>
+
+		<!-- WOD -->
+		<Script file="Dailies\ZygorDailiesAllianceWOD.lua"/>
+		<Script file="Dailies\ZygorDailiesAllianceWODTrial.lua"/>
+
+		<Script file="Dailies\ZygorDailiesHordeWOD.lua"/>
+		<Script file="Dailies\ZygorDailiesHordeWODTrial.lua"/>
+
+		<!-- LEGION -->
+		<Script file="Dailies\ZygorDailiesAllianceLEGION.lua"/>
+		<Script file="Dailies\ZygorDailiesAllianceLEGIONTrial.lua"/>
+
+		<Script file="Dailies\ZygorDailiesHordeLEGION.lua"/>
+		<Script file="Dailies\ZygorDailiesHordeLEGIONTrial.lua"/>
+
+		<Script file="Dailies\ZygorDailiesCommonLEGION.lua"/>
+		<Script file="Dailies\ZygorDailiesCommonLEGIONTrial.lua"/>
+
+		<!-- BFA -->
+		<Script file="Dailies\ZygorDailiesAllianceBFA.lua"/>
+		<Script file="Dailies\ZygorDailiesAllianceBFATrial.lua"/>
+
+		<Script file="Dailies\ZygorDailiesHordeBFA.lua"/>
+		<Script file="Dailies\ZygorDailiesHordeBFATrial.lua"/>
+
+		<Script file="Dailies\ZygorDailiesCommonBFA.lua"/>
+		<Script file="Dailies\ZygorDailiesCommonBFATrial.lua"/>
+
+		<!-- SHADOWLANDS -->
+		<Script file="Dailies\ZygorDailiesAllianceSHADOW.lua"/>
+		<Script file="Dailies\ZygorDailiesAllianceSHADOWTrial.lua"/>
+
+		<Script file="Dailies\ZygorDailiesHordeSHADOW.lua"/>
+		<Script file="Dailies\ZygorDailiesHordeSHADOWTrial.lua"/>
+
+		<Script file="Dailies\ZygorDailiesCommonSHADOW.lua"/>
+		<Script file="Dailies\ZygorDailiesCommonSHADOWTrial.lua"/>
+
+		<!-- DRAGONFLIGHT -->
+		
+		<Script file="Dailies\ZygorDailiesAllianceDRAGON.lua"/>
+		<Script file="Dailies\ZygorDailiesAllianceDRAGONTrial.lua"/>
+
+		<Script file="Dailies\ZygorDailiesHordeDRAGON.lua"/>
+		<Script file="Dailies\ZygorDailiesHordeDRAGONTrial.lua"/>
+
+		<Script file="Dailies\ZygorDailiesCommonDRAGON.lua"/>
+		<Script file="Dailies\ZygorDailiesCommonDRAGONTrial.lua"/>
+
+
+	<!-- DUNGEONS -->
+		<!-- MOP -->
+		<Script file="Dungeons\ZygorDungeonAllianceMOP.lua"/>
+		<Script file="Dungeons\ZygorDungeonAllianceMOPTrial.lua"/>
+
+		<Script file="Dungeons\ZygorDungeonHordeMOP.lua"/>
+		<Script file="Dungeons\ZygorDungeonHordeMOPTrial.lua"/>
+		
+		<Script file="Dungeons\ZygorDungeonScenariosAlliance_MoP.lua"/>
+		<Script file="Dungeons\ZygorDungeonScenariosAlliance_MoPTrial.lua"/>
+		<Script file="Dungeons\ZygorDungeonScenariosHorde_MoP.lua"/>
+		<Script file="Dungeons\ZygorDungeonScenariosHorde_MoPTrial.lua"/>
+
+		<!-- WOD -->
+		<Script file="Dungeons\ZygorDungeonAllianceWOD.lua"/>
+		<Script file="Dungeons\ZygorDungeonAllianceWODTrial.lua"/>
+
+		<Script file="Dungeons\ZygorDungeonHordeWOD.lua"/>
+		<Script file="Dungeons\ZygorDungeonHordeWODTrial.lua"/>
+		
+		<!-- bfa alpha change
+		-->
+
+		<!-- LEGION -->
+		<Script file="Dungeons\ZygorDungeonAllianceLEGION.lua"/>
+		<Script file="Dungeons\ZygorDungeonAllianceLEGIONTrial.lua"/>
+
+		<Script file="Dungeons\ZygorDungeonScenariosAllianceLEGION.lua"/>
+		<Script file="Dungeons\ZygorDungeonScenariosAllianceLEGIONTrial.lua"/>
+
+		<Script file="Dungeons\ZygorDungeonHordeLEGION.lua"/>
+		<Script file="Dungeons\ZygorDungeonHordeLEGIONTrial.lua"/>
+
+		<Script file="Dungeons\ZygorDungeonScenariosHordeLEGION.lua"/>
+		<Script file="Dungeons\ZygorDungeonScenariosHordeLEGIONTrial.lua"/>
+
+		<!-- BFA -->
+		<Script file="Dungeons\ZygorDungeonAllianceBFA.lua"/>
+		<Script file="Dungeons\ZygorDungeonAllianceBFATrial.lua"/>
+
+		<Script file="Dungeons\ZygorDungeonScenariosAllianceBFA.lua"/>
+		<Script file="Dungeons\ZygorDungeonScenariosAllianceBFATrial.lua"/>
+
+		<Script file="Dungeons\ZygorDungeonHordeBFA.lua"/>
+		<Script file="Dungeons\ZygorDungeonHordeBFATrial.lua"/>
+
+		<Script file="Dungeons\ZygorDungeonScenariosHordeBFA.lua"/>
+		<Script file="Dungeons\ZygorDungeonScenariosHordeBFATrial.lua"/>
+
+		<!-- SHADOWLANDS -->
+		<Script file="Dungeons\ZygorDungeonAllianceSHADOW.lua"/>
+		<Script file="Dungeons\ZygorDungeonAllianceSHADOWTrial.lua"/>
+
+		<Script file="Dungeons\ZygorDungeonScenariosAllianceSHADOW.lua"/>
+		<Script file="Dungeons\ZygorDungeonScenariosAllianceSHADOWTrial.lua"/>
+
+		<Script file="Dungeons\ZygorDungeonHordeSHADOW.lua"/>
+		<Script file="Dungeons\ZygorDungeonHordeSHADOWTrial.lua"/>
+
+		<Script file="Dungeons\ZygorDungeonScenariosHordeSHADOW.lua"/>
+		<Script file="Dungeons\ZygorDungeonScenariosHordeSHADOWTrial.lua"/>
+
+		<Script file="Dungeons\ZygorDungeonCommonSHADOW.lua"/>
+		<Script file="Dungeons\ZygorDungeonCommonSHADOWTrial.lua"/>
+
+		<!-- DRAGONFLIGHT -->
+		<Script file="Dungeons\ZygorDungeonAllianceDRAGON.lua"/>
+		<Script file="Dungeons\ZygorDungeonAllianceDRAGONTrial.lua"/>
+
+		<Script file="Dungeons\ZygorDungeonHordeDRAGON.lua"/>
+		<Script file="Dungeons\ZygorDungeonHordeDRAGONTrial.lua"/>
+
+		<Script file="Dungeons\ZygorDungeonCommonDRAGON.lua"/>
+		<Script file="Dungeons\ZygorDungeonCommonDRAGONTrial.lua"/>
+
+
+	<!-- GEAR -->
+		<Script file="Dungeons\ZygorGearHorde.lua"/>
+		
+		<Script file="Dungeons\ZygorGearAlliance.lua"/>
+
+		<Script file="Dungeons\ZygorGearCommonMOP.lua"/>
+
+		<Script file="Dungeons\ZygorGearCommonWOD.lua"/>
+
+		<Script file="Dungeons\ZygorGearCommonLEGION.lua"/>
+
+		<Script file="Dungeons\ZygorGearCommonBFA.lua"/>
+
+		<Script file="Dungeons\ZygorGearCommonSHADOW.lua"/>
+
+		<Script file="Dungeons\ZygorGearCommonDRAGON.lua"/>
+
+	<!-- PROFESSIONS -->
+		<!-- CATA -->
+		<Script file='Professions\ZygorProfessionsCommon.lua'/> <!-- Everyone gets this -->
+		<Script file='Professions\ZygorProfessionsCommonMOP.lua'/> <!-- Everyone on MOP gets this -->
+		<Script file='Professions\ZygorProfessionsCommonWOD.lua'/> <!-- Everyone on WOD gets this -->
+
+		<Script file="Professions\ZygorProfessionsAllianceCATA.lua"/>
+		<Script file="Professions\ZygorProfessionsAllianceCATATrial.lua"/>
+
+		<Script file="Professions\ZygorProfessionsHordeCATA.lua"/>
+		<Script file="Professions\ZygorProfessionsHordeCATATrial.lua"/>
+		
+		<!-- MOP -->
+		<Script file="Professions\ZygorProfessionsHordeMOP.lua"/>
+		<Script file="Professions\ZygorProfessionsHordeMOPTrial.lua"/>
+
+		<Script file="Professions\ZygorProfessionsAllianceMOP.lua"/>
+		<Script file="Professions\ZygorProfessionsAllianceMOPTrial.lua"/>
+
+		<!-- WOD -->
+		<Script file="Professions\ZygorProfessionsHordeWOD.lua"/>
+		<Script file="Professions\ZygorProfessionsHordeWODTrial.lua"/>
+
+		<Script file="Professions\ZygorProfessionsAllianceWOD.lua"/>
+		<Script file="Professions\ZygorProfessionsAllianceWODTrial.lua"/>
+
+		<!-- Legion -->
+		<Script file="Professions\ZygorProfessionsHordeLEGION.lua"/>
+		<Script file="Professions\ZygorProfessionsHordeLEGIONTrial.lua"/>
+
+		<Script file="Professions\ZygorProfessionsAllianceLEGION.lua"/>
+		<Script file="Professions\ZygorProfessionsAllianceLEGIONTrial.lua"/>
+
+		<!-- BFA -->
+		<Script file="Professions\ZygorProfessionsHordeBFA.lua"/>
+		<Script file="Professions\ZygorProfessionsHordeBFATrial.lua"/>
+
+		<Script file="Professions\ZygorProfessionsAllianceBFA.lua"/>
+		<Script file="Professions\ZygorProfessionsAllianceBFATrial.lua"/>
+
+		<!-- SHADOWLANDS -->
+		<Script file="Professions\ZygorProfessionsCommonSHADOW.lua"/>
+		<Script file="Professions\ZygorProfessionsCommonSHADOWTrial.lua"/>
+
+		<Script file="Professions\ZygorProfessionsHordeSHADOW.lua"/>
+		<Script file="Professions\ZygorProfessionsHordeSHADOWTrial.lua"/>
+
+		<Script file="Professions\ZygorProfessionsAllianceSHADOW.lua"/>
+		<Script file="Professions\ZygorProfessionsAllianceSHADOWTrial.lua"/>
+		
+		<!-- DRAGON -->
+		<Script file="Professions\ZygorProfessionsCommonDRAGON.lua"/>
+		<Script file="Professions\ZygorProfessionsCommonDRAGONTrial.lua"/>
+
+	<!-- ACHIEVEMENTS -->
+		<!-- CATA -->
+		<Script file="Achievements\ZygorAchievementsCommon.lua"/> <!-- Everyone gets this -->
+
+		<Script file="Achievements\ZygorAchievementsAllianceCATA.lua"/>
+		<Script file="Achievements\ZygorAchievementsAllianceCATATrial.lua"/>
+
+		<Script file="Achievements\ZygorAchievementsHordeCATA.lua"/>
+		<Script file="Achievements\ZygorAchievementsHordeCATATrial.lua"/>
+
+		<!-- MOP -->
+		<Script file="Achievements\ZygorAchievementsHordeMOP.lua"/>
+		<Script file="Achievements\ZygorAchievementsHordeMOPTrial.lua"/>
+
+		<Script file="Achievements\ZygorAchievementsAllianceMOP.lua"/>
+		<Script file="Achievements\ZygorAchievementsAllianceMOPTrial.lua"/>
+
+		<!-- WOD -->
+		<Script file="Achievements\ZygorAchievementsHordeWOD.lua"/>
+		<Script file="Achievements\ZygorAchievementsHordeWODTrial.lua"/>
+
+		<Script file="Achievements\ZygorAchievementsAllianceWOD.lua"/>
+		<Script file="Achievements\ZygorAchievementsAllianceWODTrial.lua"/>
+
+		<!-- LEGION -->
+		<Script file="Achievements\ZygorAchievementsAllianceLEGION.lua"/>
+		<Script file="Achievements\ZygorAchievementsAllianceLEGIONTrial.lua"/>
+
+		<Script file="Achievements\ZygorAchievementsHordeLEGION.lua"/>
+		<Script file="Achievements\ZygorAchievementsHordeLEGIONTrial.lua"/>
+	
+		<!-- BFA -->
+		<Script file="Achievements\ZygorAchievementsAllianceBFA.lua"/>
+		<Script file="Achievements\ZygorAchievementsAllianceBFATrial.lua"/>
+
+		<Script file="Achievements\ZygorAchievementsHordeBFA.lua"/>
+		<Script file="Achievements\ZygorAchievementsHordeBFATrial.lua"/>
+
+		<!-- SHADOWLANDS -->
+		<Script file="Achievements\ZygorAchievementsAllianceSHADOW.lua"/>
+		<Script file="Achievements\ZygorAchievementsAllianceSHADOWTrial.lua"/>
+
+		<Script file="Achievements\ZygorAchievementsHordeSHADOW.lua"/>
+		<Script file="Achievements\ZygorAchievementsHordeSHADOWTrial.lua"/>
+
+		<Script file="Achievements\ZygorAchievementsCommonSHADOW.lua"/>
+		<Script file="Achievements\ZygorAchievementsCommonSHADOWTrial.lua"/>
+
+		<!-- DRAGONFLIGHT -->
+		<Script file="Achievements\ZygorAchievementsAllianceDRAGON.lua"/>
+		<Script file="Achievements\ZygorAchievementsAllianceDRAGONTrial.lua"/>
+
+		<Script file="Achievements\ZygorAchievementsHordeDRAGON.lua"/>
+		<Script file="Achievements\ZygorAchievementsHordeDRAGONTrial.lua"/>
+
+		<Script file="Achievements\ZygorAchievementsCommonDRAGON.lua"/>
+		<Script file="Achievements\ZygorAchievementsCommonDRAGONTrial.lua"/>
+	
+
+	<!-- PETS AND MOUNTS -->
+		<!-- All Pets  Order for these matters-->
+		<!--SHADOWLANDS PETS-->
+		<Script file="PetsMounts\ZygorPetsAllianceSHADOW.lua"/>
+		<Script file="PetsMounts\ZygorPetsAllianceSHADOWTrial.lua"/>
+
+		<Script file="PetsMounts\ZygorPetsHordeSHADOW.lua"/>
+		<Script file="PetsMounts\ZygorPetsHordeSHADOWTrial.lua"/>
+
+		<Script file="PetsMounts\ZygorPetsCommonSHADOW.lua"/>
+		<Script file="PetsMounts\ZygorPetsCommonSHADOWTrial.lua"/>
+
+		<!--BFA PETS-->
+		<Script file="PetsMounts\ZygorPetsAllianceBFA.lua"/>
+		<Script file="PetsMounts\ZygorPetsAllianceBFATrial.lua"/>
+
+		<Script file="PetsMounts\ZygorPetsHordeBFA.lua"/>
+		<Script file="PetsMounts\ZygorPetsHordeBFATrial.lua"/>
+
+		<Script file="PetsMounts\ZygorPetsCommonBFA.lua"/>
+		<Script file="PetsMounts\ZygorPetsCommonBFATrial.lua"/>
+
+		<!--LEGION PETS-->
+		<Script file="PetsMounts\ZygorPetsAllianceLEGION.lua"/>
+		<Script file="PetsMounts\ZygorPetsAllianceLEGIONTrial.lua"/>
+
+		<Script file="PetsMounts\ZygorPetsHordeLEGION.lua"/>
+		<Script file="PetsMounts\ZygorPetsHordeLEGIONTrial.lua"/>
+
+		<Script file="PetsMounts\ZygorPetsCommonLEGION.lua"/>
+		<Script file="PetsMounts\ZygorPetsCommonLEGIONTrial.lua"/>
+
+		<!--WOD PETS-->
+		<Script file="PetsMounts\ZygorPetsAllianceWOD.lua"/>
+		<Script file="PetsMounts\ZygorPetsAllianceWODTrial.lua"/>
+
+		<Script file="PetsMounts\ZygorPetsHordeWOD.lua"/>
+		<Script file="PetsMounts\ZygorPetsHordeWODTrial.lua"/>
+
+		<Script file="PetsMounts\ZygorPetsCommonWOD.lua"/>
+		<Script file="PetsMounts\ZygorPetsCommonWODTrial.lua"/>
+		
+		<!--MOP PETS-->
+		<Script file="PetsMounts\ZygorPetsAllianceMOP.lua"/>
+		<Script file="PetsMounts\ZygorPetsAllianceMOPTrial.lua"/>
+
+		<Script file="PetsMounts\ZygorPetsHordeMOP.lua"/>
+		<Script file="PetsMounts\ZygorPetsHordeMOPTrial.lua"/>
+
+		<Script file="PetsMounts\ZygorPetsCommonMOP.lua"/>
+		<Script file="PetsMounts\ZygorPetsCommonMOPTrial.lua"/>
+		
+		<!--CATA PETS-->
+		<Script file="PetsMounts\ZygorPetsAllianceCATA.lua"/>
+		<Script file="PetsMounts\ZygorPetsAllianceCATATrial.lua"/>
+		
+		<Script file="PetsMounts\ZygorPetsHordeCATA.lua"/>
+		<Script file="PetsMounts\ZygorPetsHordeCATATrial.lua"/>
+
+		<Script file="PetsMounts\ZygorPetsCommonCATA.lua"/>
+		<Script file="PetsMounts\ZygorPetsCommonCATATrial.lua"/>
+			
+		<!-- CATA -->
+		<Script file="PetsMounts\ZygorHunterPetHordeCATA.lua"/>
+		<Script file="PetsMounts\ZygorHunterPetHordeCATATrial.lua"/>
+
+		<Script file="PetsMounts\ZygorHunterPetAllianceCATA.lua"/>
+		<Script file="PetsMounts\ZygorHunterPetAllianceCATATrial.lua"/>
+		
+		<Script file="PetsMounts\ZygorMountsHordeCATA.lua"/>
+		<Script file="PetsMounts\ZygorMountsHordeCATATrial.lua"/>
+
+		<Script file="PetsMounts\ZygorMountsAllianceCATA.lua"/>
+		<Script file="PetsMounts\ZygorMountsAllianceCATATrial.lua"/>
+		
+		<!-- MOP -->
+		<Script file="PetsMounts\ZygorHunterPetHordeMOP.lua"/>
+		<Script file="PetsMounts\ZygorHunterPetHordeMOPTrial.lua"/>
+
+		<Script file="PetsMounts\ZygorHunterPetAllianceMOP.lua"/>
+		<Script file="PetsMounts\ZygorHunterPetAllianceMOPTrial.lua"/>
+		
+		<Script file="PetsMounts\ZygorMountsHordeMOP.lua"/>
+		<Script file="PetsMounts\ZygorMountsHordeMOPTrial.lua"/>
+
+		<Script file="PetsMounts\ZygorMountsAllianceMOP.lua"/>
+		<Script file="PetsMounts\ZygorMountsAllianceMOPTrial.lua"/>
+
+		<Script file="PetsMounts\ZygorBattlePetQuestsHordeMOP.lua"/>
+		<Script file="PetsMounts\ZygorBattlePetQuestsHordeMOPTrial.lua"/>
+
+		<Script file="PetsMounts\ZygorBattlePetQuestsAllianceMOP.lua"/>
+		<Script file="PetsMounts\ZygorBattlePetQuestsAllianceMOPTrial.lua"/>
+		
+		<!-- WOD -->
+		<Script file="PetsMounts\ZygorHunterPetHordeWOD.lua"/>
+		<Script file="PetsMounts\ZygorHunterPetHordeWODTrial.lua"/>
+
+		<Script file="PetsMounts\ZygorHunterPetAllianceWOD.lua"/>
+		<Script file="PetsMounts\ZygorHunterPetAllianceWODTrial.lua"/>
+		
+		<Script file="PetsMounts\ZygorMountsHordeWOD.lua"/>
+		<Script file="PetsMounts\ZygorMountsHordeWODTrial.lua"/>
+
+		<Script file="PetsMounts\ZygorMountsAllianceWOD.lua"/>
+		<Script file="PetsMounts\ZygorMountsAllianceWODTrial.lua"/>
+
+		<Script file="PetsMounts\ZygorBattlePetQuestsHordeWOD.lua"/>
+		<Script file="PetsMounts\ZygorBattlePetQuestsHordeWODTrial.lua"/>
+
+		<Script file="PetsMounts\ZygorBattlePetQuestsAllianceWOD.lua"/>
+		<Script file="PetsMounts\ZygorBattlePetQuestsAllianceWODTrial.lua"/>
+
+		<!-- LEGION -->
+		<Script file="PetsMounts\ZygorHunterPetHordeLEGION.lua"/>
+		<Script file="PetsMounts\ZygorHunterPetHordeLEGIONTrial.lua"/>
+
+		<Script file="PetsMounts\ZygorHunterPetAllianceLEGION.lua"/>
+		<Script file="PetsMounts\ZygorHunterPetAllianceLEGIONTrial.lua"/>
+		
+		<Script file="PetsMounts\ZygorMountsHordeLEGION.lua"/>
+		<Script file="PetsMounts\ZygorMountsHordeLEGIONTrial.lua"/>
+
+		<Script file="PetsMounts\ZygorMountsAllianceLEGION.lua"/>
+		<Script file="PetsMounts\ZygorMountsAllianceLEGIONTrial.lua"/>
+
+		<Script file="PetsMounts\ZygorBattlePetQuestsHordeLEGION.lua"/>
+		<Script file="PetsMounts\ZygorBattlePetQuestsHordeLEGIONTrial.lua"/>
+
+		<Script file="PetsMounts\ZygorBattlePetQuestsAllianceLEGION.lua"/>
+		<Script file="PetsMounts\ZygorBattlePetQuestsAllianceLEGIONTrial.lua"/>
+	
+		<!-- BFA -->
+		<Script file="PetsMounts\ZygorHunterPetHordeBFA.lua"/>
+		<Script file="PetsMounts\ZygorHunterPetHordeBFATrial.lua"/>
+
+		<Script file="PetsMounts\ZygorHunterPetAllianceBFA.lua"/>
+		<Script file="PetsMounts\ZygorHunterPetAllianceBFATrial.lua"/>
+		
+		<Script file="PetsMounts\ZygorMountsHordeBFA.lua"/>
+		<Script file="PetsMounts\ZygorMountsHordeBFATrial.lua"/>
+
+		<Script file="PetsMounts\ZygorMountsAllianceBFA.lua"/>
+		<Script file="PetsMounts\ZygorMountsAllianceBFATrial.lua"/>
+
+		<Script file="PetsMounts\ZygorBattlePetQuestsHordeBFA.lua"/>
+		<Script file="PetsMounts\ZygorBattlePetQuestsHordeBFATrial.lua"/>
+
+		<Script file="PetsMounts\ZygorBattlePetQuestsAllianceBFA.lua"/>
+		<Script file="PetsMounts\ZygorBattlePetQuestsAllianceBFATrial.lua"/>
+
+		<!-- SHADOWLANDS -->
+		<Script file="PetsMounts\ZygorHunterPetHordeSHADOW.lua"/>
+		<Script file="PetsMounts\ZygorHunterPetHordeSHADOWTrial.lua"/>
+
+		<Script file="PetsMounts\ZygorHunterPetAllianceSHADOW.lua"/>
+		<Script file="PetsMounts\ZygorHunterPetAllianceSHADOWTrial.lua"/>
+		
+		<Script file="PetsMounts\ZygorMountsHordeSHADOW.lua"/>
+		<Script file="PetsMounts\ZygorMountsHordeSHADOWTrial.lua"/>
+
+		<Script file="PetsMounts\ZygorMountsAllianceSHADOW.lua"/>
+		<Script file="PetsMounts\ZygorMountsAllianceSHADOWTrial.lua"/>
+
+		<Script file="PetsMounts\ZygorMountsCommonSHADOW.lua"/>
+		<Script file="PetsMounts\ZygorMountsCommonSHADOWTrial.lua"/>
+
+		<Script file="PetsMounts\ZygorBattlePetQuestsHordeSHADOW.lua"/>
+		<Script file="PetsMounts\ZygorBattlePetQuestsHordeSHADOWTrial.lua"/>
+
+		<Script file="PetsMounts\ZygorBattlePetQuestsAllianceSHADOW.lua"/>
+		<Script file="PetsMounts\ZygorBattlePetQuestsAllianceSHADOWTrial.lua"/>
+
+		<!-- SHADOWLANDS -->
+		
+		<Script file="PetsMounts\ZygorMountsHordeDRAGON.lua"/>
+		<Script file="PetsMounts\ZygorMountsHordeDRAGONTrial.lua"/>
+
+		<Script file="PetsMounts\ZygorMountsAllianceDRAGON.lua"/>
+		<Script file="PetsMounts\ZygorMountsAllianceDRAGONTrial.lua"/>
+
+		<Script file="PetsMounts\ZygorMountsCommonDRAGON.lua"/>
+		<Script file="PetsMounts\ZygorMountsCommonDRAGONTrial.lua"/>
+	
+
+	<!-- TITLES -->
+		<!-- CATA -->
+		<Script file="Titles\ZygorTitlesHordeCATA.lua"/>
+		<Script file="Titles\ZygorTitlesHordeCATATrial.lua"/>
+
+		<Script file="Titles\ZygorTitlesAllianceCATA.lua"/>
+		<Script file="Titles\ZygorTitlesAllianceCATATrial.lua"/>
+
+		<!-- MOP -->
+		<Script file="Titles\ZygorTitlesHordeMOP.lua"/>
+		<Script file="Titles\ZygorTitlesHordeMOPTrial.lua"/>
+
+		<Script file="Titles\ZygorTitlesAllianceMOP.lua"/>
+		<Script file="Titles\ZygorTitlesAllianceMOPTrial.lua"/>
+
+		<!-- WOD -->
+		<Script file="Titles\ZygorTitlesHordeWOD.lua"/>
+		<Script file="Titles\ZygorTitlesHordeWODTrial.lua"/>
+
+		<Script file="Titles\ZygorTitlesAllianceWOD.lua"/>
+		<Script file="Titles\ZygorTitlesAllianceWODTrial.lua"/>
+
+		<!-- LEGION -->
+		<Script file="Titles\ZygorTitlesHordeLEGION.lua"/>
+		<Script file="Titles\ZygorTitlesHordeLEGIONTrial.lua"/>
+		
+		<Script file="Titles\ZygorTitlesAllianceLEGION.lua"/>
+		<Script file="Titles\ZygorTitlesAllianceLEGIONTrial.lua"/>
+
+		<!-- BFA -->
+		<Script file="Titles\ZygorTitlesHordeBFA.lua"/>
+		<Script file="Titles\ZygorTitlesHordeBFATrial.lua"/>
+		
+		<Script file="Titles\ZygorTitlesAllianceBFA.lua"/>
+		<Script file="Titles\ZygorTitlesAllianceBFATrial.lua"/>
+
+		<!-- SHADOWLANDS -->
+		<Script file="Titles\ZygorTitlesHordeSHADOW.lua"/>
+		<Script file="Titles\ZygorTitlesHordeSHADOWTrial.lua"/>
+		
+		<Script file="Titles\ZygorTitlesAllianceSHADOW.lua"/>
+		<Script file="Titles\ZygorTitlesAllianceSHADOWTrial.lua"/>
+
+
+	<!-- REPUTATIONS -->
+		<!-- CATA -->	
+		<Script file="Reputations\ZygorReputationsHordeCATA.lua"/>
+		<Script file="Reputations\ZygorReputationsHordeCATATrial.lua"/>
+
+		<Script file="Reputations\ZygorReputationsAllianceCATA.lua"/>
+		<Script file="Reputations\ZygorReputationsAllianceCATATrial.lua"/>
+
+		<!-- MOP -->
+		<Script file="Reputations\ZygorReputationsHordeMOP.lua"/>
+		<Script file="Reputations\ZygorReputationsHordeMOPTrial.lua"/>
+
+		<Script file="Reputations\ZygorReputationsAllianceMOP.lua"/>
+		<Script file="Reputations\ZygorReputationsAllianceMOPTrial.lua"/>
+
+		<!-- WOD -->
+		<Script file="Reputations\ZygorReputationsHordeWOD.lua"/>
+		<Script file="Reputations\ZygorReputationsHordeWODTrial.lua"/>
+
+		<Script file="Reputations\ZygorReputationsAllianceWOD.lua"/>
+		<Script file="Reputations\ZygorReputationsAllianceWODTrial.lua"/>
+
+		<!-- LEGION -->
+		<Script file="Reputations\ZygorReputationsAllianceLEGION.lua"/>
+		<Script file="Reputations\ZygorReputationsAllianceLEGIONTrial.lua"/>
+
+		<Script file="Reputations\ZygorReputationsHordeLEGION.lua"/>
+		<Script file="Reputations\ZygorReputationsHordeLEGIONTrial.lua"/>
+
+		<!-- BFA -->
+		<Script file="Reputations\ZygorReputationsAllianceBFA.lua"/>
+		<Script file="Reputations\ZygorReputationsAllianceBFATrial.lua"/>
+
+		<Script file="Reputations\ZygorReputationsHordeBFA.lua"/>
+		<Script file="Reputations\ZygorReputationsHordeBFATrial.lua"/>
+
+		<!-- SHADOWLANDS -->
+		<Script file="Reputations\ZygorReputationsAllianceSHADOW.lua"/>
+		<Script file="Reputations\ZygorReputationsAllianceSHADOWTrial.lua"/>
+
+		<Script file="Reputations\ZygorReputationsHordeSHADOW.lua"/>
+		<Script file="Reputations\ZygorReputationsHordeSHADOWTrial.lua"/>
+
+		<!-- DRAGONFLIGHT -->
+		<Script file="Reputations\ZygorReputationsAllianceDRAGON.lua"/>
+		<Script file="Reputations\ZygorReputationsAllianceDRAGONTrial.lua"/>
+
+		<Script file="Reputations\ZygorReputationsHordeDRAGON.lua"/>
+		<Script file="Reputations\ZygorReputationsHordeDRAGONTrial.lua"/>
+
+		<Script file="Reputations\ZygorReputationsCommonDRAGON.lua"/>
+		<Script file="Reputations\ZygorReputationsCommonDRAGONTrial.lua"/>
+
+	<!-- EVENTS -->
+		<Script file="Events\ZygorEventsAlliance.lua"/>
+		<Script file="Events\ZygorEventsAllianceTrial.lua"/>
+
+		<Script file="Events\ZygorEventsHorde.lua"/>
+		<Script file="Events\ZygorEventsHordeTrial.lua"/>
+
+	<!-- GOLD -->
+		<Script file="Gold\CraftingTablesScrolls.lua"/>
+		<Script file="Gold\CraftingTablesLevels.lua"/>
+		<Script file="Gold\AHItemStatus.lua"/>
+
+		<!-- WOD -->
+		<Script file="Gold\ZygorFarmingCommonWOD.lua"/>
+		<Script file="Gold\ZygorFarmingAllianceWOD.lua"/>
+		<Script file="Gold\ZygorFarmingHordeWOD.lua"/>
+		<Script file="Gold\ZygorGatheringCommonWOD.lua"/>
+		<Script file="Gold\ZygorGatheringAllianceWOD.lua"/>
+		<Script file="Gold\ZygorGatheringHordeWOD.lua"/>
+		<Script file="Gold\ZygorGoldRunsCommonWOD.lua"/>
+		<Script file="Gold\ZygorGoldRunsAllianceWOD.lua"/>
+		<Script file="Gold\ZygorGoldRunsHordeWOD.lua"/>
+
+		<!-- LEGION -->
+		<Script file="Gold\ZygorFarmingCommonLEGION.lua"/>
+		<Script file="Gold\ZygorFarmingAllianceLEGION.lua"/>
+		<Script file="Gold\ZygorFarmingHordeLEGION.lua"/>
+		<Script file="Gold\ZygorGatheringCommonLEGION.lua"/>
+		<Script file="Gold\ZygorGatheringAllianceLEGION.lua"/>
+		<Script file="Gold\ZygorGatheringHordeLEGION.lua"/>
+	
+		<!-- BFA -->
+		<Script file="Gold\ZygorFarmingCommonBFA.lua"/>
+		<Script file="Gold\ZygorFarmingAllianceBFA.lua"/>
+		<Script file="Gold\ZygorFarmingHordeBFA.lua"/>
+		<Script file="Gold\ZygorGatheringCommonBFA.lua"/>
+		<Script file="Gold\ZygorGatheringAllianceBFA.lua"/>
+		<Script file="Gold\ZygorGatheringHordeBFA.lua"/>
+
+		<!-- SHADOWLANDS -->
+		<Script file="Gold\ZygorFarmingCommonSHADOW.lua"/>
+		<Script file="Gold\ZygorFarmingAllianceSHADOW.lua"/>
+		<Script file="Gold\ZygorFarmingHordeSHADOW.lua"/>
+		<Script file="Gold\ZygorGatheringCommonSHADOW.lua"/>
+		<Script file="Gold\ZygorGatheringAllianceSHADOW.lua"/>
+		<Script file="Gold\ZygorGatheringHordeSHADOW.lua"/>
+
+		<!-- SHADOWLANDS -->
+		<Script file="Gold\ZygorFarmingCommonDRAGON.lua"/>
+		<Script file="Gold\ZygorFarmingAllianceDRAGON.lua"/>
+		<Script file="Gold\ZygorFarmingHordeDRAGON.lua"/>
+		<Script file="Gold\ZygorGatheringCommonDRAGON.lua"/>
+		<Script file="Gold\ZygorGatheringAllianceDRAGON.lua"/>
+		<Script file="Gold\ZygorGatheringHordeDRAGON.lua"/>
+
+	
+	<!-- POINTS OF INTEREST -->
+		<Script file="Poi\Common.lua" />
+		<!-- WOD -->
+		<Script file="Poi\WOD_A_Rares.lua" />
+		<Script file="Poi\WOD_H_Rares.lua" />
+		<Script file="Poi\WOD_A_Treasures.lua" />
+		<Script file="Poi\WOD_H_Treasures.lua" />
+
+		<!-- LEGION -->
+		<Script file="Poi\LEG_A_Rares.lua" />
+		<Script file="Poi\LEG_H_Rares.lua" />
+		<Script file="Poi\LEG_A_Treasures.lua" />
+		<Script file="Poi\LEG_H_Treasures.lua" />
+
+		<!-- BFA -->
+		<Script file="Poi\BFA_A_Rares.lua" />
+		<Script file="Poi\BFA_H_Rares.lua" />
+		<Script file="Poi\BFA_A_Treasures.lua" />
+		<Script file="Poi\BFA_H_Treasures.lua" />
+
+		<!-- SHADOWLANDS -->
+		<Script file="Poi\SHADOW_A_RaresTrial.lua" />
+		<Script file="Poi\SHADOW_A_Rares.lua" />
+
+		<Script file="Poi\SHADOW_H_RaresTrial.lua" />
+		<Script file="Poi\SHADOW_H_Rares.lua" />
+
+		<Script file="Poi\SHADOW_Common_RaresTrial.lua" />
+		<Script file="Poi\SHADOW_Common_Rares.lua" />
+
+		<Script file="Poi\SHADOW_A_TreasuresTrial.lua" />
+		<Script file="Poi\SHADOW_A_Treasures.lua" />
+
+		<Script file="Poi\SHADOW_H_TreasuresTrial.lua" />
+		<Script file="Poi\SHADOW_H_Treasures.lua" />
+
+		<Script file="Poi\SHADOW_Common_TreasuresTrial.lua" />
+		<Script file="Poi\SHADOW_Common_Treasures.lua" />
+
+	<!--
+	-->
+	
+
+
+</Ui>

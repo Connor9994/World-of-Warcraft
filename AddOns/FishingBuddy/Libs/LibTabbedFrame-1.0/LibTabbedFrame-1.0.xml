@@ -1,0 +1,25 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+    <Script file="LibTabbedFrame-1.0.lua"/>
+
+	<Button name="LibTabbedFrameTabTemplate" inherits="PanelTabButtonTemplate" virtual="true" hidden="true">
+		<Scripts>
+			<OnLoad>
+				self:SetFrameLevel(self:GetFrameLevel() + 4);
+				self:RegisterEvent("DISPLAY_SIZE_CHANGED");
+			</OnLoad>
+			<OnEvent>
+				if (self:IsVisible()) then
+					PanelTemplates_TabResize(self, 0, nil, 36, self:GetParent().maxTabWidth or 88);
+				end
+			</OnEvent>
+			<OnEnter>
+				local buttonText = _G[self:GetName().."Text"];
+				if (buttonText and buttonText:IsTruncated()) then
+					GameTooltip:SetOwner(self, "ANCHOR_RIGHT");
+					GameTooltip:SetText(buttonText:GetText());
+				end
+			</OnEnter>
+		</Scripts>
+    </Button>
+</Ui>

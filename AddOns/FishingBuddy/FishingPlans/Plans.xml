@@ -1,0 +1,10 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+	<Include file="Items.lua" />
+	<Include file="Lures.lua" />
+	<Include file="Bobbers.xml" />
+	<Include file="Coins.lua" />
+	<Include file="Baits.lua" />
+	<Include file="Pets.xml" />
+	<Include file="Rafts.lua" />
+</Ui>

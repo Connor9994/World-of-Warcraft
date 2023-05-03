@@ -1,0 +1,26 @@
+local ZygorGuidesViewer=ZygorGuidesViewer
+if not ZygorGuidesViewer then return end
+if ZGV:DoMutex("DailiesCSHADOW") then return end
+ZygorGuidesViewer.GuideMenuTier = "TRI"
+ZygorGuidesViewer:RegisterGuidePlaceholder("Zygor's Dailies Guides\\Shadowlands (50-60)\\Ardenweald World Quests")
+ZygorGuidesViewer:RegisterGuidePlaceholder("Zygor's Dailies Guides\\Shadowlands (50-60)\\Bastion World Quests")
+ZygorGuidesViewer:RegisterGuidePlaceholder("Zygor's Dailies Guides\\Shadowlands (50-60)\\Maldraxxus World Quests")
+ZygorGuidesViewer:RegisterGuidePlaceholder("Zygor's Dailies Guides\\Shadowlands (50-60)\\The Maw World Quests")
+ZygorGuidesViewer:RegisterGuidePlaceholder("Zygor's Dailies Guides\\Shadowlands (50-60)\\Revendreth World Quests")
+ZygorGuidesViewer:RegisterGuidePlaceholder("Zygor's Dailies Guides\\Shadowlands (50-60)\\Zereth Mortis World Quests")
+ZygorGuidesViewer:RegisterGuidePlaceholder("Dailies Guides\\Shadowlands (50-60)\\Ve'nari Daily Quests (The Maw)")
+ZygorGuidesViewer:RegisterGuidePlaceholder("Dailies Guides\\Shadowlands (50-60)\\Kyrian Covenant\\Kyrian Daily Quests")
+ZygorGuidesViewer:RegisterGuidePlaceholder("Dailies Guides\\Shadowlands (50-60)\\Necrolords Covenant\\Necrolord Daily Quests")
+ZygorGuidesViewer:RegisterGuidePlaceholder("Dailies Guides\\Shadowlands (50-60)\\Night Fae Covenant\\Night Fae Daily Quests")
+ZygorGuidesViewer:RegisterGuidePlaceholder("Dailies Guides\\Shadowlands (50-60)\\Night Fae Covenant\\Fungal Terminus Daily Quests")
+ZygorGuidesViewer:RegisterGuidePlaceholder("Dailies Guides\\Shadowlands (50-60)\\Venthyr Covenant\\Venthyr Daily Quests")
+ZygorGuidesViewer:RegisterGuidePlaceholder("Dailies Guides\\Shadowlands (50-60)\\Kyrian Covenant\\Kyrian Anima Conductor Daily Quests")
+ZygorGuidesViewer:RegisterGuidePlaceholder("Dailies Guides\\Shadowlands (50-60)\\Necrolords Covenant\\Necrolords Anima Conductor Daily Quests")
+ZygorGuidesViewer:RegisterGuidePlaceholder("Dailies Guides\\Shadowlands (50-60)\\Night Fae Covenant\\Night Fae Anima Conductor Daily Quests")
+ZygorGuidesViewer:RegisterGuidePlaceholder("Dailies Guides\\Shadowlands (50-60)\\Venthyr Covenant\\Venthyr Anima Conductor Daily Quests")
+ZGV.BETASTART()
+ZygorGuidesViewer:RegisterGuidePlaceholder("Dailies Guides\\Shadowlands (50-60)\\Necrolords Covenant\\Necrolords Abomination Factory Weekly Quests")
+ZygorGuidesViewer:RegisterGuidePlaceholder("Dailies Guides\\Shadowlands (50-60)\\Night Fae Covenant\\Night Fae Queen's Conservatory Daily Quests")
+ZGV.BETAEND()
+ZygorGuidesViewer:RegisterGuidePlaceholder("Dailies Guides\\Shadowlands (50-60)\\Chains of Domination\\Korthia Daily Quests")
+ZygorGuidesViewer:RegisterGuidePlaceholder("Dailies Guides\\Shadowlands (50-60)\\Eternity's End\\Zereth Mortis Daily Quests")

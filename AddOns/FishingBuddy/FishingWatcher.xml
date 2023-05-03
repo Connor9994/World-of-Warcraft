@@ -1,0 +1,80 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+    <Script file="FishingWatcher.lua"/>
+    <FontString name="FishingWatchFontTemplate" inherits="GameFontNormal" virtual="true" justifyH="LEFT">
+	<Size>
+	    <AbsDimension x="0" y="13"/>
+	</Size>
+    </FontString>
+
+    <Frame name="FishingWatchFrame" frameStrata="LOW" toplevel="true" enableMouse="false" clampedToScreen="true" movable="true" parent="UIParent" hidden="true">
+		<Scripts>
+			<OnLoad>
+				FBEnvironment.Watcher_OnLoad(self);
+			</OnLoad>
+			<OnUpdate>
+				FBEnvironment.Watcher_OnUpdate(self, elapsed);
+			</OnUpdate>
+		</Scripts>
+		<Frames>
+			<Button name="FishingWatchTab" inherits="PanelTabButtonTemplate" hidden="true">
+				<Size x="64" y="32"/>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="FishingWatchFrame" relativePoint="TOPLEFT">
+						<AbsDimension x="0" y="2"/>
+					</Anchor>
+				</Anchors>
+				<Frames>
+					<Frame name="FishingBuddyWatcherMenu" inherits="UIDropDownMenuTemplate">
+						<Scripts>
+							<OnLoad>
+								UIDropDownMenu_SetWidth(self, 180);
+							</OnLoad>
+						</Scripts>
+					</Frame>
+				</Frames>
+			</Button>
+			<Frame name="FishingWatchLineHolder">
+				<Size>
+					<AbsDimension x="280" y="20"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="FishingWatchTab" relativePoint="BOTTOMLEFT">
+						<AbsDimension x="0" y="-2"/>
+					</Anchor>
+					<Anchor point="BOTTOMRIGHT" relativeTo="FishingWatchFrame" relativePoint="BOTTOMRIGHT">
+						<AbsDimension x="0" y="-2"/>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<FontString name="FishingWatchLine1" inherits="FishingWatchFontTemplate" hidden="true">
+							<Size>
+								<AbsDimension x="0" y="13"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOPLEFT" />
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+			<Button name="FishingWatchHighlight" enableMouse="false" hidden="true">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="FishingWatchLineHolder" relativePoint="TOPLEFT" />
+					<Anchor point="BOTTOMRIGHT" relativeTo="FishingWatchLineHolder" relativePoint="BOTTOMRIGHT" />
+				</Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture name="$parentBackground" file="Interface\ChatFrame\ChatFrameBackground">
+							<Anchors>
+								<Anchor point="TOPLEFT"/>
+								<Anchor point="BOTTOMRIGHT"/>
+							</Anchors>
+						</Texture>
+					</Layer>
+				</Layers>
+			</Button>
+		</Frames>
+    </Frame>
+</Ui>

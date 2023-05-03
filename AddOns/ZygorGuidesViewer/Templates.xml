@@ -1,0 +1,282 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/ D:\UI.xsd">
+	<PlayerModel name="ZygorGuidesViewerPlayerModel" virtual="true">
+		<Size x="300" y="300" />
+		<Scripts>
+			<OnLoad>
+			self.SetAutoRotation = function(self,spd)
+				self.autorotationspeed=spd
+				self.facing = 0
+			end
+			self.SetModels = function(self,models)
+				if type(models)=="table" then
+					self.models = models
+				elseif type(models)=="number" then
+					self.models = {models}
+				end
+				self:ShowModel(self.models[1])
+			end
+			self.ShowModel = function(self,model)
+				self:SetDisplayInfo(model)
+				local crop = ZGV.DisplayModelsExtra[model or 0]
+
+				self:SetModelScale(crop and crop.scale and max(crop.scale,0.01) or 1.01)
+				self:SetPosition(crop and crop.cx or 0,crop and crop.cy or 0,(crop and crop.cz or 0))
+				if crop and crop.cam then self:SetCamera(crop.cam) else self:RefreshCamera() end
+				self:SetCamDistanceScale(crop and crop.camscale and max(crop.camscale,0.01) or 1.01)
+				if crop and crop.portrait and crop.portrait>0 then self:SetPortraitZoom(crop.portrait) end
+
+			end
+			self.SetSlideshow = function(self,spd)
+				self.slideshow = spd
+				self.slideshowno = 1
+				self.slideshowelapsed = 0
+			end
+			</OnLoad>
+			<OnUpdate>
+				if self.autorotationspeed then
+					self.facing = self.facing + elapsed * self.autorotationspeed
+					self:SetFacing(self.facing)
+				end
+				if self.slideshow and self.models and #self.models>0 then
+					local min,max=min,max
+					self.slideshowelapsed = self.slideshowelapsed + elapsed
+
+					if self.slideshowelapsed>self.slideshow then
+						self.slideshowno = self.slideshowno + 1
+						if self.slideshowno>#self.models then self.slideshowno=1 end
+						self:ShowModel(self.models[self.slideshowno])
+						self.slideshowelapsed = 0
+					end
+				end
+			</OnUpdate>
+			<!--
+					local frac = self.slideshowelapsed / self.slideshow
+					if frac&lt;0.1 then self:SetAlpha(max(0,frac)*10)
+					elseif frac&gt;0.9 then self:SetAlpha(min(1,1-frac)*10)
+					else self:SetAlpha(1)
+					end
+
+			-->
+		</Scripts>
+	</PlayerModel>
+
+  
+	<Frame name="ZGV_Widget_Template" virtual="true" inherits="BackdropTemplate">
+		<Animations>
+			<AnimationGroup parentKey="warnshake" looping="REPEAT">
+				<Translation duration="0.05" order="1" smoothing="OUT" offsetX="2" offsetY="0"></Translation>
+				<Translation duration="0.05" order="2" smoothing="IN" offsetX="-2" offsetY="0"></Translation>
+			</AnimationGroup>
+		</Animations>
+		<Frames>
+			<Button hidden="false" parentKey="resizer" inherits="ZGV_DefaultSkin_TitleButton_Template" enableMouse="true" movable="true" ignoreParentAlpha="true">
+				<Size x="20" y="20" />
+				<KeyValues>
+					<KeyValue key="buttonkey" value="RESIZE" type="string"/>
+				</KeyValues>
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="-5" y="5"/>
+				</Anchors>
+			</Button>
+			<Frame setAllPoints="true" hidden="true" parentKey="overlay" enableMouse="true" inherits="BackdropTemplate" ignoreParentAlpha="true">
+				<Frames>
+					<Button hidden="false" parentKey="close" inherits="ZGV_DefaultSkin_TitleButton_Template" ignoreParentAlpha="true">
+						<Size x="20" y="20" />
+						<KeyValues>
+							<KeyValue key="buttonkey" value="CLOSE" type="string"/>
+						</KeyValues>
+						<Anchors>
+							<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" x="-5" y="-5"/>
+						</Anchors>
+					</Button>
+					<Button hidden="false" parentKey="dragger" inherits="ZGV_DefaultSkin_TitleButton_Template" enableMouse="true" movable="true" ignoreParentAlpha="true">
+						<Size x="20" y="20" />
+						<KeyValues>
+							<KeyValue key="buttonkey" value="DRAG" type="string"/>
+						</KeyValues>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="5" y="-5"/>
+						</Anchors>
+					</Button>
+					<Button hidden="false" parentKey="gameui" inherits="ZGV_DefaultSkin_TitleButton_Template" enableMouse="true" movable="true" ignoreParentAlpha="true">
+						<Size x="20" y="20" />
+						<KeyValues>
+							<KeyValue key="buttonkey" value="VISIBLE" type="string"/>
+						</KeyValues>
+						<Anchors>
+							<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" x="5" y="5"/>
+						</Anchors>
+					</Button>
+				</Frames>
+			</Frame>		
+		</Frames>
+	</Frame>
+
+	<Frame name="ZGV_Widget_Unused" virtual="true" inherits="BackdropTemplate" mixin="ZGV_Widget_Unused_Mixin">
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString parentKey="system_title" justifyH="CENTER" justifyV="TOP" inherits="GameFontHighlightSmall">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativePoint="TOPLEFT" />
+					</Anchors>
+				</FontString>
+				<FontString parentKey="system_description" justifyH="LEFT" justifyV="TOP" inherits="GameFontHighlightSmall" />
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button hidden="false" parentKey="pin" inherits="ZGV_DefaultSkin_TitleButton_Template" ignoreParentAlpha="true">
+				<Size x="24" y="24" />
+				<KeyValues>
+					<KeyValue key="buttonkey" value="LOCK_OFF" type="string"/>
+				</KeyValues>
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" x="-5" y="-5"/>
+				</Anchors>
+				<Scripts>
+					<OnClick>ZGV_Widget_Unused_Mixin.TogglePinned(self)</OnClick>
+				</Scripts>
+			</Button>
+			<Button parentKey="system_size1">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT" />
+					<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" />
+				</Anchors>
+				<Layers>
+					<Layer level="ARTWORK">
+						<Texture parentKey="tex">
+							<Size x="20" y="20"/>
+							<Anchors>
+								<Anchor point="CENTER" relativePoint="CENTER" />
+							</Anchors>
+						</Texture>
+					</Layer>
+				</Layers>
+			</Button>
+			<Button parentKey="system_size2">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeKey="$parent.system_size1"/>
+					<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT" relativeKey="$parent.system_size1" />
+				</Anchors>
+				<Layers>
+					<Layer level="ARTWORK">
+						<Texture parentKey="tex">
+							<Size x="20" y="20"/>
+							<Anchors>
+								<Anchor point="CENTER" relativePoint="CENTER" />
+							</Anchors>
+						</Texture>
+					</Layer>
+				</Layers>
+			</Button>
+			<Button parentKey="system_size3">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeKey="$parent.system_size2"/>
+					<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT" relativeKey="$parent.system_size2" />
+				</Anchors>
+				<Layers>
+					<Layer level="ARTWORK">
+						<Texture parentKey="tex">
+							<Size x="20" y="20"/>
+							<Anchors>
+								<Anchor point="CENTER" relativePoint="CENTER" />
+							</Anchors>
+						</Texture>
+					</Layer>
+				</Layers>
+			</Button>
+			<Button parentKey="system_size4">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeKey="$parent.system_size3"/>
+					<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT" relativeKey="$parent.system_size3" />
+				</Anchors>
+				<Layers>
+					<Layer level="ARTWORK">
+						<Texture parentKey="tex">
+							<Size x="20" y="20"/>
+							<Anchors>
+								<Anchor point="CENTER" relativePoint="CENTER" />
+							</Anchors>
+						</Texture>
+					</Layer>
+				</Layers>
+			</Button>
+		</Frames>
+	</Frame>
+
+	<Frame name="ZGV_Widget_Header" virtual="true" inherits="BackdropTemplate">
+		<Size x="200" y="25" />
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString parentKey="Name" justifyH="CENTER" justifyV="TOP" inherits="GameFontNormalLarge">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativePoint="TOPLEFT" />
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+	</Frame>
+
+	<Button name="ZygorSearchButton" virtual="true" frameStrata="MEDIUM">
+		<Size x="25" y="25" />
+		<Scripts>
+			 <OnEnter>
+				GameTooltip:ClearAllPoints()
+				GameTooltip:ClearLines()
+				GameTooltip:SetOwner(self,"ANCHOR_TOPLEFT")
+				GameTooltip:AddLine(self.tooltiptext)
+				GameTooltip:Show()
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide()
+			</OnLeave>
+			<OnLoad>
+				self:SetNormalTexture(ZGV.DIR.."\\Skins\\findinzygor")
+			</OnLoad>
+		</Scripts>
+	</Button>
+
+	<Button name="ZygorTalentIconButton" virtual="true" frameStrata="MEDIUM" mixin="ZygorTalentIconButton_Mixin">
+		<Size x="32" y="32" />
+		<Scripts>
+			 <OnEnter>
+				GameTooltip:ClearAllPoints()
+				GameTooltip:ClearLines()
+				GameTooltip:SetOwner(self,"ANCHOR_TOPLEFT")
+				GameTooltip:AddLine(self.tooltiptext)
+				GameTooltip:Show()
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide()
+			</OnLeave>
+			<OnLoad>
+				self:SetNormalTexture(ZGV.DIR.."\\Skins\\findinzygor")
+			</OnLoad>
+		</Scripts>
+	</Button>
+
+	<Button name="ZygorActionButton" virtual="true" frameStrata="MEDIUM" inherits="SecureActionButtonTemplate,SecureHandlerStateTemplate" />
+	<Button name="ZygorActionButtonOverlay" virtual="true" frameStrata="MEDIUM" mixin="ZygorActionButtonOverlay_Mixin">
+		<Frames>
+			<Cooldown name="$parentCooldown" inherits="CooldownFrameTemplate" useParentLevel="true" parentKey="cooldown">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeKey="$parent.icon" x="3" y="-3"/>
+					<Anchor point="BOTTOMRIGHT" relativeKey="$parent.icon" x="-3" y="3"/>
+				</Anchors>				
+				<SwipeTexture>
+					<Color r="1" g="1" b="1" a="0.8"/>
+				</SwipeTexture>
+			</Cooldown>
+		</Frames>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentIcon" parentKey="icon" />
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnEnter method="OnEnter"/>
+			<OnLeave method="OnLeave"/>
+		</Scripts>
+	</Button>
+
+
+</Ui>

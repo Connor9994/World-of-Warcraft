@@ -1,0 +1,20 @@
+## Interface: 90002
+## Version: 17
+
+## Title: Lib: Realm Info
+## Notes: Library to provide information about realms.
+## Notes-deDE: Bibliothek, um Informationen über Realms zu liefern.
+## Notes-esES: Biblioteca para proporcionar información sobre reinos.
+## Notes-esMX: Biblioteca para proporcionar información sobre reinos.
+
+## Author: Janekjl
+## X-Email: 4iamking@gmail.com
+## X-License: Zlib
+## X-Website: https://github.com/janekjl/LibRealmInfo
+## X-Curse-Project-ID: 83224
+## X-WoWI-ID: 22987
+
+## OptionalDeps: LibStub
+LibStub\LibStub.lua
+
+LibRealmInfo.lua

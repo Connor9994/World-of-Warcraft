@@ -1,0 +1,10 @@
+## Interface: 100005
+## LoadOnDemand: 1
+## Title: Lib: LibDataBroker-1.1
+## Notes: LDB's primary goal is to "detach" plugins for TitanPanel and FuBar from the display addon.
+## Author: Tekkub
+## X-Website: http://github.com/tekkub/libdatabroker-1-1/
+## X-Category: Library
+## X-License: All Rights Reserved
+
+Load.xml

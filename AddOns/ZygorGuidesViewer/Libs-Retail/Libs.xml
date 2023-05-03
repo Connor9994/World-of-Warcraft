@@ -1,0 +1,13 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+	<Script>
+	___ZGV_TIMESTAMP_LOADLIBSXML_START = debugprofilestop()
+	</Script>
+
+	<Include file="LibTaxi-1.0\lib.xml"/>
+	<Include file="LibRover-1.0\lib.xml"/>
+
+	<Script>
+	___ZGV_TIMESTAMP_LOADLIBSXML_END=debugprofilestop()
+	</Script>
+</Ui>

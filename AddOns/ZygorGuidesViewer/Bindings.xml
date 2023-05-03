@@ -1,0 +1,24 @@
+<Bindings>
+	<Binding name="ZYGORGUIDES_OPENGUIDE" description="Toggle Zygor's Guides" header="ZYGORGUIDES" category="Zygor Guides Viewer">
+		ZygorGuidesViewer:ToggleFrame()
+	</Binding>
+	<Binding name="ZYGORGUIDES_PREV" description="Previous Step" category="Zygor Guides Viewer">
+		ZygorGuidesViewer.Frame:PrevButton_OnClick("LeftButton")
+	</Binding>
+	<Binding name="ZYGORGUIDES_NEXT" description="Next Step" category="Zygor Guides Viewer">
+		ZygorGuidesViewer.Frame:NextButton_OnClick("LeftButton")
+	</Binding>
+      <Binding name="ZYGOR_WAYPOINT_NEXT" description="Next Waypoint" category="Zygor Guides Viewer">
+          ZGV.Pointer:CycleWaypoint(1)
+      </Binding>
+      <Binding name="ZYGOR_WAYPOINT_PREV" description="Previous Waypoint" category="Zygor Guides Viewer">
+          ZGV.Pointer:CycleWaypoint(-1)
+      </Binding>
+	<Binding name="CLICK ZygorAB1:LeftButton" header="ZYGORGUIDESATIONBAR" category="Zygor Guides Viewer"/>
+	<Binding name="CLICK ZygorAB2:LeftButton" category="Zygor Guides Viewer"/>
+	<Binding name="CLICK ZygorAB3:LeftButton" category="Zygor Guides Viewer"/>
+	<Binding name="CLICK ZygorAB4:LeftButton" category="Zygor Guides Viewer"/>
+	<Binding name="CLICK ZygorAB5:LeftButton" category="Zygor Guides Viewer"/>
+
+	
+</Bindings>

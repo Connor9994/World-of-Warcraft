@@ -1,0 +1,796 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="file:///c|/downloads/UI.xsd">
+
+	<!--- Template: Text used to show goal text -->
+	<FontString name="ZGV_DefaultSkin_StepLineText_Template" inherits="GameFontHighlightSmall" text="" justifyH="LEFT" justifyV="TOP" virtual="true">
+		<!-- multilineIndent="true" -->
+		<Anchors>
+			<Anchor point="TOPLEFT" relativePoint="TOPLEFT" />
+		</Anchors>
+		<Color r="1.0" g="1.0" b="1.0" />
+	</FontString>
+
+	<!--- Template: Texture used to show goal icon -->
+	<Texture name="ZGV_DefaultSkin_StepLineIcon_Template" virtual="true">
+		<Size x="14" y="14" />
+	</Texture>
+
+	<!--- Template: Texture used to show goal change state animation -->
+	<Frame name="ZGV_DefaultSkin_StepLineBack_Template" virtual="true" mixin="BackFlatTemplate_Mixin">
+		<Animations>
+			<AnimationGroup parentKey="Fade">
+				<Animation duration="0.5" smoothing="OUT">
+					<Scripts>
+						<OnPlay>
+							local p = self:GetParent()
+							ZGV:Debug("&amp;greenlines fade on %d starting from %s%d,%d,%d",p:GetParent():GetParent().num,ZGV.ArrayToStringColor({p.sr,p.sg,p.sb,p.sa}),p.sr*255,p.sg*255,p.sb*255)
+						</OnPlay>
+						<OnUpdate>
+							local back = self:GetRegionParent()
+							local parent = self:GetParent()
+							local progress = self:GetSmoothProgress()
+							local r=parent.sr+(parent.r-parent.sr)*progress
+							local g=parent.sg+(parent.g-parent.sg)*progress
+							local b=parent.sb+(parent.b-parent.sb)*progress
+							local a=parent.sa+(parent.a-parent.sa)*progress
+							back:SetColor(r,g,b,a)
+						</OnUpdate>
+						<OnFinished>
+							local p = self:GetParent()
+							local back = self:GetRegionParent()
+							back:SetColor(p.r,p.g,p.b,p.a)
+							ZGV:Debug("&amp;greenlines fade on %d finished at %s%d,%d,%d",p:GetParent():GetParent().num,ZGV.ArrayToStringColor({p.r,p.g,p.b,p.a}),p.r*255,p.g*255,p.b*255)
+						</OnFinished>
+					</Scripts>
+				</Animation>
+			</AnimationGroup>
+		</Animations>
+		<Scripts>
+			<OnLoad method="OnBackdropLoaded"/>
+		</Scripts>
+	</Frame>
+
+	<!--- Template: title button -->
+	<Button name="ZGV_DefaultSkin_TitleButton_Template" mixin="ZGV_DefaultSkin_TitleButton_Mixin" virtual="true">
+		<Size x="20" y="20" />
+		<NormalTexture parentKey="ntx"  />
+		<PushedTexture parentKey="ptx"  />
+		<HighlightTexture parentKey="htx"  alphaMode="ADD" />
+		<Scripts>
+			<OnLeave function="ZygorGuidesViewerFrame_HideTooltip" />
+		</Scripts>
+	</Button>
+
+	<Frame name="ZGV_DefaultSkin_StepLine_Template" virtual="true" mixin="ZGV_DefaultSkin_StepLine_Mixin">
+		<Frames>
+			<Frame inherits="ZGV_DefaultSkin_StepLineBack_Template" hidden="true" parentKey="back" setAllPoints="true" />
+			<Frame setAllPoints="true" parentKey="content">
+				<Layers>
+					<Layer level="ARTWORK">
+						<Texture inherits="ZGV_DefaultSkin_StepLineIcon_Template" hidden="true" parentKey="icon" />
+						<FontString inherits="ZGV_DefaultSkin_StepLineText_Template" parentKey="label" />
+					</Layer>
+				</Layers>
+			</Frame>
+			<Button hidden="false" parentKey="clicker" frameLevel="99" alpha="0.0" setAllPoints="true" mixin="BackFlatTemplate_Mixin, ZGV_DefaultSkin_StepLineClicker_Mixin">
+				<Scripts>
+					<OnLoad method="OnLoad"/>
+					<OnClick method="OnClick"/>
+					<OnEnter method="OnEnter"/>
+					<OnLeave method="OnLeave"/>
+					<OnUpdate method="OnUpdate"/>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad method="OnLoad"/>
+		</Scripts>
+	</Frame>
+
+	<Button name="ZGV_DefaultSkin_DefaultStep_Template" virtual="true" hidden="true" movable="true" enableMouse="true" inherits="BackdropTemplate" mixin="ZGV_DefaultSkin_DefaultStep_Mixin">
+		<Animations>
+			<AnimationGroup parentKey="slideup">
+				<Animation duration="0.3" smoothing="IN_OUT" order="1">
+					<Scripts>
+						<OnPlay>
+							-- ONLY for step 1
+							self.f = self:GetRegionParent()
+							self.f:ClearAllPoints()
+							self.offset = 50
+						</OnPlay>
+						<OnUpdate>
+							local off = -self.offset*(1-self:GetSmoothProgress())
+							self.f:SetPoint("TOPLEFT",ZGV.Frame.Controls.Scroll.Child,"TOPLEFT",0,off)
+							self.f:SetPoint("TOPRIGHT",ZGV.Frame.Controls.Scroll.Child,"TOPRIGHT",0,off)
+						</OnUpdate>
+						<OnFinished>
+							self.f:SetPoint("TOPLEFT",ZGV.Frame.Controls.Scroll.Child,"TOPLEFT",0,0)
+							self.f:SetPoint("TOPRIGHT",ZGV.Frame.Controls.Scroll.Child,"TOPRIGHT",0,0)
+						</OnFinished>
+					</Scripts>
+				</Animation>
+			</AnimationGroup>
+			<AnimationGroup parentKey="fadeout">
+				<Alpha duration="2.3" smoothing="NONE" fromAlpha="1" toAlpha="0" order="1">
+					<Scripts>
+						<OnFinished>
+							self:GetRegionParent():Hide()
+						</OnFinished>
+					</Scripts>
+				</Alpha>
+			</AnimationGroup>
+		</Animations>
+		<Frames>
+			<Frame parentKey="border" setAllPoints="true"  inherits="BackdropTemplate"/>
+		</Frames>
+		<Scripts>
+			<OnLoad inherit="append" method="OnLoad" />
+			<OnUpdate method="OnUpdate" />
+			<OnEnter method="OnEnter" />
+			<OnLeave method="OnLeave" />
+			<!--
+			<OnDragStart method="OnDragStart" />
+			<OnDragStop method="OnDragStop" />
+			-->
+		</Scripts>
+		<!-- step mouse highlight, just in case we need it some day -->
+		<!--
+		<Layers>
+			<Layer level="HIGHLIGHT">
+				<Texture name="$parentHilite" parentKey="hilite" setallpoints="true">
+					<Color r="1" g="1" b="1" a="1" />
+				</Texture>
+			</Layer>
+		</Layers>
+		-->
+	</Button>
+
+	<Button name="ZGV_DefaultSkin_SillyStep_Template" virtual="true" hidden="true" movable="true" enableMouse="true" inherits="BackdropTemplate" mixin="ZGV_DefaultSkin_DefaultStep_Mixin">
+		<Frames>
+			<Frame parentKey="border" setAllPoints="true"  inherits="BackdropTemplate"/>
+			<Button inherits="StaticPopupButtonTemplate">
+					<Anchors>
+						<Anchor point="TOPLEFT" x="40" y="-50"/>
+					</Anchors>
+					<Scripts>
+						<OnLoad>self.Text:SetText("Click Me")</OnLoad>
+					</Scripts>
+			</Button>
+		</Frames>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString text="Hello!" inherits="GameFontNormalLarge">
+					<Anchors>
+						<Anchor point="TOPLEFT" x="20" />
+					</Anchors>
+				</FontString>
+				<FontString text="I Am A Custom Step" inherits="BossEmoteNormalHuge" parentKey="dance">
+					<Anchors>
+						<Anchor point="TOPLEFT" x="20" y="-20"/>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad method="OnLoad" />
+			<OnDragStart method="OnDragStart" />
+			<OnDragStop method="OnDragStop" />
+		</Scripts>
+		<!-- step mouse highlight, just in case we need it some day -->
+		<!--
+		<Layers>
+			<Layer level="HIGHLIGHT">
+				<Texture name="$parentHilite" parentKey="hilite" setallpoints="true">
+					<Color r="1" g="1" b="1" a="1" />
+				</Texture>
+			</Layer>
+		</Layers>
+		-->
+	</Button>
+
+	<Texture name="ZGV_DefaultSkin_StickySeparator_Template" virtual="true" file="Interface\Buttons\white8x8">
+		<Size x="1" y="2" />
+	</Texture>
+
+	<Button name="ZygorGuidesViewer_Default_Button" virtual="true">
+		<Size x="40" y="20" />
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parent_BGLeft" parentKey="bgleft">
+					<Size x="10" y="20" />
+					<Anchors>
+						<Anchor point="LEFT" />
+					</Anchors>
+				</Texture>
+				<Texture name="$parent_BGRight" parentKey="bgright">
+					<Size x="10" y="20" />
+					<Anchors>
+						<Anchor point="RIGHT" />
+					</Anchors>
+				</Texture>
+				<Texture name="$parent_BGMid" parentKey="bgmid">
+					<Size x="10" y="20" />
+					<Anchors>
+						<Anchor point="CENTER" />
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="HIGHLIGHT">
+				<Texture name="$parent_BGHigh" parentKey="high" setAllPoints="true" />
+			</Layer>
+			<Layer level="ARTWORK">
+				<Texture name="$parent_Icon" parentKey="icon">
+					<Size x="20" y="20" />
+					<Anchors>
+						<Anchor point="CENTER" />
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<ButtonText name="$parentText" parentKey="text" />
+		<NormalFont style="GameFontHighlight" />
+		<HighlightFont style="GameFontHighlight" />
+		<DisabledFont style="GameFontDisable" />
+		<Scripts>
+			<OnMouseDown>
+				if not self:IsEnabled() then return end
+				self.bgleft:SetTexCoord(0,0.245,0.51,0.99)
+				self.bgright:SetTexCoord(0.255,0.495,0.51,0.99)
+				self.bgmid:SetTexCoord(0.570,0.930,0.51,0.99)
+			</OnMouseDown>
+			<OnEnter>
+				if not self:IsEnabled() then return end
+				local tip = self:GetAttribute("tooltip")
+				if tip then
+					local tip2 = self:GetAttribute("tooltip2")
+					GameTooltip:SetOwner(self, "ANCHOR_TOPRIGHT")
+					GameTooltip:SetText(tip)
+					if tip2 then
+						GameTooltip:AddLine(tip2,0,1,0)  
+					end
+				GameTooltip:Show()
+				end
+			</OnEnter>
+			<OnLeave>
+				if not self:IsEnabled() then return end
+				self.bgleft:SetTexCoord(0,0.245,0.01,0.49)
+				self.bgright:SetTexCoord(0.255,0.495,0.01,0.49)
+				self.bgmid:SetTexCoord(0.570,0.930,0.01,0.49)
+				GameTooltip:Hide()
+			</OnLeave>
+			<OnMouseUp>
+				self:GetScript("OnLeave")(self)
+			</OnMouseUp>
+			<OnLoad>
+				self.origSetSize = self.SetSize
+				self.SetSize = function(self,w,h)
+					if w&lt;h then 
+						w=h 
+					end
+					self:origSetSize(w,h)
+					self.bgleft:SetSize(h/2,h)
+					self.bgright:SetSize(h/2,h)
+					if w&gt;h then 
+						self.bgmid:SetSize(w-h,h) 
+						self.bgmid:Show() 
+					else 
+						self.bgmid:Hide() 
+					end
+				end
+				self.bgleft:SetTexture(ZGV.StyleDir.."button")
+				self.bgright:SetTexture(ZGV.StyleDir.."button")
+				self.bgmid:SetTexture(ZGV.StyleDir.."button")
+				self:GetScript("OnLeave")(self)
+				self:SetPushedTextOffset(0,-1)
+				self.text:SetPoint("CENTER",self,"CENTER",0,1)
+			</OnLoad>
+		</Scripts>
+	</Button>
+
+
+	<Button name="ZGV_Guide_Rating_Star_Template" virtual="true" hidden="false" movable="false" enableMouse="true" inherits="BackdropTemplate" mixin="ZGV_DefaultSkin_GuideStar_Mixin">
+		<Scripts>
+			<OnLoad>self:RegisterForClicks("LeftButtonUp","RightButtonUp")</OnLoad>
+			<OnClick method="OnClick" />
+			<OnEnter method="OnEnter" />
+			<OnLeave method="OnLeave" />
+			<!--
+			<OnUpdate method="OnUpdate" />
+			<OnDragStart method="OnDragStart" />
+			<OnDragStop method="OnDragStop" />
+			-->
+		</Scripts>
+        <NormalTexture parentKey="ntx"  />
+        <PushedTexture parentKey="ptx"  />
+        <HighlightTexture parentKey="htx"  alphaMode="ADD" />
+	</Button>
+
+	<Frame name="ZGV_DefaultSkin_Frame_Template" toplevel="true" hidden="true" resizable="true" clampedToScreen="true" virtual="true" mixin="ZGV_DefaultSkin_Frame_Mixin">
+		<Anchors>
+			<Anchor point="CENTER" relativePoint="CENTER" />
+		</Anchors>
+		<Size x="320" y="100" />
+		<Scripts>
+			<OnLoad method="OnLoad" />
+			<OnShow method="OnShow" />
+			<OnHide method="OnHide" />
+			<OnSizeChanged method="OnSizeChanged" />
+			<OnUpdate method="OnUpdate" />
+			<OnMouseWheel method="OnMouseWheel" />
+		</Scripts>
+		<Frames>
+			<Button parentKey="FakeStep" inherits="ZGV_DefaultSkin_DefaultStep_Template" />
+			<Frame hidden="true" parentKey="Border" setAllPoints="true" inherits="BackdropTemplate">
+				<Frames>
+					<Frame parentKey="Back" inherits="BackdropTemplate" ></Frame>
+					<Frame parentKey="TitleBar">
+						<KeyValues><KeyValue key="GenericDrag" value="true" type="boolean"/></KeyValues>
+						<Size x="150" y="30" />
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="0" y="0" />
+							<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" x="0" y="0" />
+						</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<Texture parentKey="Logo">
+									<KeyValues><KeyValue key="SkinTexture" value="TitleLogo" type="string"/></KeyValues>
+									<Size x="120" y="30" />
+									<Anchors>
+										<Anchor point="CENTER" relativePoint="CENTER" />
+									</Anchors>
+									<!-- <TexCoords left="0.8198" right="0.9087" top="0.7627" bottom="0.9404"/> -->
+								</Texture>
+								<FontString parentKey="DevLabel" inherits="GameFontNormalTiny" text="DEV" justifyH="CENTER" justifyV="TOP" hidden="true">
+									<Size x="200" y="20" />
+									<Anchors>
+										<Anchor point="TOP" relativePoint="BOTTOM" relativeKey="$parent.Logo" x="0" y="6" />
+									</Anchors>
+									<Color r="1.0" g="1.0" b="1.0" />
+								</FontString>
+							</Layer>
+						</Layers>
+						<Frames>
+							<!--
+							<Button parentKey="SearchButton" inherits="ZGV_DefaultSkin_TitleButton_Template">
+								<KeyValues>
+									<KeyValue key="GenericDrag" value="true" type="boolean"/>
+									<KeyValue key="buttonkey" value="QUESTION" type="string"/>
+								</KeyValues>
+								<Size x="20" y="20" />
+								<Anchors>
+									<Anchor point="CENTER" relativePoint="LEFT" x="15" y="0" />
+								</Anchors>
+								<Scripts>
+									<OnClick>ZGV.Frame.SearchButton_OnClick(self,button)</OnClick>
+									<OnEnter>ZGV.Frame.SearchButton_OnEnter(self)</OnEnter>
+								</Scripts>
+							</Button>
+							<Button name="ZygorGuidesViewerFrame_HelpButton" parentKey="HelpButton" hidden="true" inherits="ZGV_DefaultSkin_TitleButton_Template"></Button>
+								<Anchors>
+									<Anchor point="CENTER" relativePoint="LEFT">
+										<Offset x="38" y="0" />
+									</Anchor>
+								</Anchors>
+								<Scripts>
+									<OnClick function="ZygorGuidesViewerFrame_HelpButton_OnClick" />
+									<OnEnter function="ZygorGuidesViewerFrame_HelpButton_OnEnter" />
+									<OnLeave function="ZygorGuidesViewerFrame_HideTooltip" />
+								</Scripts>
+								<Scripts>
+									<OnLoad>self:Show() self:RegisterForClicks("LeftButtonUp","RightButtonUp")
+										self:RegisterForDrag("LeftButton")</OnLoad>
+									<OnDragStart>ZGV.GenericDragStartHandler(button)</OnDragStart>
+									<OnDragStop>ZGV.GenericDragStopHandler()</OnDragStop>
+								</Scripts>
+							</Button>
+							-->
+							<Button parentKey="ReportButton" hidden="true" inherits="ZGV_DefaultSkin_TitleButton_Template">
+								<KeyValues>
+									<KeyValue key="GenericDrag" value="true" type="boolean"/>
+									<KeyValue key="buttonkey" value="BUGREPORT" type="string"/>
+								</KeyValues>
+								<Anchors>
+									<Anchor point="CENTER" relativePoint="RIGHT" x="-55" y="0" />
+								</Anchors>
+								<Scripts>
+									<OnClick>ZGV.Frame.ReportButton_OnClick(self,button)</OnClick>
+									<OnEnter>ZGV.Frame.ReportButton_OnEnter(self)</OnEnter>
+								</Scripts>
+								<Scripts>
+									<OnLoad>if (ZGV.DEV or ZGV.BETA) and ZGV.db.profile.reportbutton then self:Show() end  self:RegisterForClicks("LeftButtonUp","RightButtonUp") 
+										self:RegisterForDrag("LeftButton")</OnLoad>
+								</Scripts>
+							</Button>
+							<Frame parentKey="Loading"> <!--inherits="ZygorQuestsLoadingIcon"-->
+								<KeyValues><KeyValue key="GenericDrag" value="true" type="boolean"/></KeyValues>
+								<Size x="20" y="20" />
+								<Anchors>
+									<Anchor point="CENTER" relativePoint="LEFT" x="55" y="0" />
+								</Anchors>
+							</Frame>
+							<!--
+							<Button parentKey="LockButton">
+								<KeyValues><KeyValue key="GenericDrag" value="true" type="boolean"/></KeyValues>
+								<Size x="20" y="20" />
+								<Anchors>
+									<Anchor point="CENTER" relativePoint="RIGHT" x="-33" y="1" />
+								</Anchors>
+								<NormalTexture parentKey="ntx"  />
+								<PushedTexture parentKey="ptx"  />
+								<HighlightTexture parentKey="htx"  alphaMode="ADD" />
+								<Scripts>
+									<OnClick>ZGV.Frame.LockButton_OnClick(self,button)</OnClick>
+									<OnEnter>ZGV.Frame.LockButton_OnEnter(self)</OnEnter>
+									<OnLeave function="ZygorGuidesViewerFrame_HideTooltip" />
+								</Scripts>
+							</Button>
+							-->
+							<Button inherits="UIPanelCloseButton,ZGV_DefaultSkin_TitleButton_Template" parentKey="CloseButton">
+								<KeyValues>
+									<KeyValue key="GenericDrag" value="true" type="boolean"/>
+									<KeyValue key="buttonkey" value="CLOSE" type="string"/>
+								</KeyValues>
+								<Anchors>
+									<Anchor point="CENTER" relativePoint="RIGHT" x="-15" y="0" />
+								</Anchors>
+								<Scripts>
+									<OnClick>ZGV.Frame.CloseButton_OnClick(self,button)</OnClick>
+								</Scripts>
+							</Button>
+							<Button parentKey="Notifications" inherits="ZGV_DefaultSkin_TitleButton_Template">
+								<Anchors>
+									<Anchor point="CENTER" relativePoint="RIGHT" x="-35" y="0" />
+								</Anchors>
+								<KeyValues>
+									<KeyValue key="buttonkey" value="NOTIFICATIONS" type="string"/>
+								</KeyValues>
+								<Scripts>
+									<OnClick>ZGV.Frame.Notifications_OnClick(self,button)</OnClick>
+									<OnEnter>ZGV.Frame.Notifications_OnEnter(self)</OnEnter>
+								</Scripts>
+								<Frames>
+									<Frame parentKey="Counter" hidden="true">
+										<Size x="20" y="20" />
+										<Anchors>
+											<Anchor point="TOPRIGHT" x="8" y="8" />
+										</Anchors>
+										<Layers>
+											<Layer level="OVERLAY">
+												<Texture parentKey="BG" hidden="false" file="Interface\CharacterFrame\TempPortraitAlphaMaskSmall">
+													<Size x="12" y="12" />
+													<Anchors>
+														<Anchor point="CENTER" />
+													</Anchors>
+												</Texture>
+												<FontString parentKey="Text" inherits="GameFontNormal" text="0" justifyH="CENTER" justifyV="MIDDLE" hidden="false">
+													<Size x="20" y="20" />
+													<Anchors>
+														<Anchor point="CENTER" />
+													</Anchors>
+													<Color r="1.0" g="1.0" b="1.0" />
+												</FontString>							
+											</Layer>
+										</Layers>
+									</Frame>
+								</Frames>
+							</Button>
+							<Frame hidden="true" parentKey="MenuHostNotifications" inherits="UIDropDownForkTemplate" enableMouse="true"></Frame>
+
+						</Frames>
+					</Frame>
+					<Button parentKey="MenuSettingsButton" inherits="ZGV_DefaultSkin_TitleButton_Template">
+						<KeyValues>
+							<KeyValue key="GenericDrag" value="true" type="boolean"/>
+							<KeyValue key="buttonkey" value="BURGER" type="string"/>
+						</KeyValues>
+						<Scripts>
+							<OnClick>ZGV.Frame:MenuSettingsButton_OnClick()</OnClick>
+							<OnEnter>ZGV.Frame:MenuSettingsButton_OnEnter()</OnEnter>
+						</Scripts>
+						<Scripts>
+							<OnLoad>self:RegisterForClicks("LeftButtonUp","RightButtonUp") self:RegisterForDrag("LeftButton")</OnLoad>
+						</Scripts>
+					</Button>
+
+					<Frame parentKey="TabContainer" inherits="BackdropTemplate">
+						<Frames>
+							<Button parentKey="TabsAddButton" inherits="ZGV_DefaultSkin_TitleButton_Template">
+								<KeyValues>
+									<KeyValue key="GenericDrag" value="true" type="boolean"/>
+									<KeyValue key="buttonkey" value="ADDGUIDE" type="string"/>
+									<KeyValue key="forceinsetx" value="0" type="number"/>
+									<KeyValue key="forceinsety" value="0" type="number"/>
+									<KeyValue key="forcewidth" value="12" type="number"/>
+									<KeyValue key="forceheight" value="12" type="number"/>
+								</KeyValues>
+								<Scripts>
+									<OnClick>ZGV.Tabs.AddButtonOnClick(self,button)</OnClick>
+									<OnEnter>ZGV.Tabs.AddButtonOnEnter(self,button)</OnEnter>
+									<OnLeave>GameTooltip:Hide()</OnLeave>
+									<OnLoad>self:RegisterForClicks("LeftButtonUp","RightButtonUp") self:RegisterForDrag("LeftButton")</OnLoad>
+								</Scripts>
+							</Button>
+
+							<Button parentKey="TabsMoreButton" inherits="ZGV_DefaultSkin_TitleButton_Template">
+								<KeyValues>
+									<KeyValue key="GenericDrag" value="true" type="boolean"/>
+									<KeyValue key="buttonkey" value="MORETABS" type="string"/>
+								</KeyValues>
+								<Anchors>
+									<Anchor point="LEFT" relativePoint="RIGHT" x="0" y="0" relativeKey="$parent.TabsAddButton" />
+								</Anchors>
+								<Scripts>
+									<OnClick>ZGV.Tabs:ToggleRemainingMenu()</OnClick>
+									<OnLoad>self:RegisterForClicks("LeftButtonUp","RightButtonUp") self:RegisterForDrag("LeftButton")</OnLoad>
+								</Scripts>
+							</Button>
+						</Frames>
+					</Frame>
+
+					<Frame parentKey="Toolbar" inherits="BackdropTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" x="5" y="50" />
+						</Anchors>
+						<Size x="20" y="22" />
+						<Frames>
+
+							<Button parentKey="MenuAdditionalButton" inherits="ZGV_DefaultSkin_TitleButton_Template">
+								<KeyValues>
+									<KeyValue key="GenericDrag" value="true" type="boolean"/>
+									<KeyValue key="buttonkey" value="DOTS" type="string"/>
+								</KeyValues>
+								<Anchors>
+									<Anchor point="CENTER" relativePoint="RIGHT" x="-15" y="0" />
+								</Anchors>
+								<Scripts>
+									<OnClick>ZGV.Frame:MenuAdditionalButton_OnClick()</OnClick>
+									<OnEnter>ZGV.Frame:MenuAdditionalButton_OnEnter()</OnEnter>
+								</Scripts>
+							</Button>
+	
+							<Button parentKey="ReportStep" inherits="ZGV_DefaultSkin_TitleButton_Template">
+								<KeyValues>
+									<KeyValue key="GenericDrag" value="true" type="boolean"/>
+									<KeyValue key="buttonkey" value="STEPREPORT" type="string"/>
+								</KeyValues>
+								<Anchors>
+									<Anchor point="RIGHT" relativePoint="LEFT" relativeKey="$parent.MenuAdditionalButton" x="-5" y="0" />
+								</Anchors>
+								<Scripts>
+									<OnClick>ZGV.Frame:ReportStepButton_OnClick(button)</OnClick>
+									<OnEnter>ZGV.Frame:ReportStepButton_OnEnter()</OnEnter>
+								</Scripts>
+							</Button>
+
+							<Button parentKey="GuideShareButton" inherits="ZGV_DefaultSkin_TitleButton_Template">
+								<KeyValues>
+									<KeyValue key="GenericDrag" value="true" type="boolean"/>
+									<KeyValue key="buttonkey" value="SHARE" type="string"/>
+								</KeyValues>
+								<Anchors>
+									<Anchor point="RIGHT" relativePoint="LEFT" relativeKey="$parent.ReportStep" x="-5" y="0" />
+								</Anchors>
+								<Scripts>
+									<OnClick>ZGV.Frame.GuideShareButton_OnClick(self,button)</OnClick>
+									<OnEnter>ZGV.Frame.GuideShareButton_OnEnter(self)</OnEnter>
+									<OnDragStart>if not ZygorGuidesViewer.db.profile["windowlocked"] then if button=='LeftButton' then ZygorGuidesViewerFrameMaster:StartMoving() ZygorGuidesViewer.framemoving=true else ZygorGuidesViewer:SetOption("Display","resizeup") end end</OnDragStart>
+									<OnDragStop>ZygorGuidesViewerFrameMaster:StopMovingOrSizing() ZygorGuidesViewer:AlignFrame() ZGV.framemoving=nil</OnDragStop>
+									<OnLoad>self:RegisterForDrag("LeftButton")</OnLoad>
+								</Scripts>
+							</Button>
+
+
+							<Button parentKey="PrevButton" inherits="ZGV_DefaultSkin_TitleButton_Template">
+								<KeyValues>
+									<KeyValue key="GenericDrag" value="true" type="boolean"/>
+									<KeyValue key="buttonkey" value="STEP_PREV" type="string"/>
+								</KeyValues>
+								<Anchors>
+									<Anchor point="LEFT" relativePoint="LEFT" x="4" y="0" />
+								</Anchors>
+								<Scripts>
+									<OnClick>ZGV.Frame.PrevButton_OnClick(self,button)</OnClick>
+									<OnEnter>ZGV.Frame.PrevButton_OnEnter(self)</OnEnter>
+								</Scripts>
+							</Button>
+							<Frame parentKey="StepNum">
+								<Size x="24" y="20" />
+								<Anchors>
+									<Anchor point="LEFT" relativeKey="$parent.PrevButton" relativePoint="RIGHT" x="-1" y="0" />
+								</Anchors>
+								<Layers>
+									<Layer level="OVERLAY">
+										<FontString parentKey="Step" inherits="GameFontHighlightSmall" justifyH="CENTER" justifyV="MIDDLE" text="" setAllPoints="true">
+											<Size x="25" y="14" />
+										</FontString>
+									</Layer>
+								</Layers>
+								<Scripts>
+									<OnLoad>self:EnableMouseWheel() self:RegisterForDrag("LeftButton")</OnLoad>
+									<OnMouseWheel>ZGV.Frame.StepNum_OnMouseWheel(selfdelta)</OnMouseWheel>
+								</Scripts>
+							</Frame>
+
+							<Button parentKey="NextButton" inherits="ZGV_DefaultSkin_TitleButton_Template">
+								<KeyValues>
+									<KeyValue key="buttonkey" value="STEP_NEXT" type="string"/>
+								</KeyValues>
+								<Anchors>
+									<Anchor point="LEFT" relativeKey="$parent.StepNum" relativePoint="RIGHT" x="-1" y="0" />
+								</Anchors>
+								<Scripts>
+									<OnClick>ZGV.Frame.NextButton_OnClick(self,button)</OnClick>
+									<OnEnter>ZGV.Frame.NextButton_OnEnter(self)</OnEnter>
+								</Scripts>
+							</Button>
+
+							<Button parentKey="NextButtonSpecial" inherits="ZGV_DefaultSkin_TitleButton_Template">
+								<KeyValues>
+									<KeyValue key="buttonkey" value="RIGHTRIGHT" type="string"/>
+								</KeyValues>
+								<Anchors>
+									<Anchor point="LEFT" relativeKey="$parent.StepNum" relativePoint="RIGHT" x="21" y="0" />
+								</Anchors>
+								<Scripts>
+									<OnClick>ZGV.Frame.NextButtonSpecial_OnClick(self,button)</OnClick>
+									<OnEnter>ZGV.Frame.NextButtonSpecial_OnEnter(self)</OnEnter>
+								</Scripts>
+								<Animations>
+									<AnimationGroup parentKey="Blink" setToFinalAlpha="true">
+										<Alpha fromAlpha="1"   toAlpha="0.5" duration=".1" order="1"/>
+										<Alpha fromAlpha="0.5" toAlpha="0.5" duration=".5" order="2"/>
+										<Alpha fromAlpha="0.5" toAlpha="1"   duration=".1" order="3"/>
+										<Alpha fromAlpha="1"   toAlpha="1  " duration=".5" order="4"/>
+										<Alpha fromAlpha="1"   toAlpha="0.5" duration=".1" order="5"/>
+										<Alpha fromAlpha="0.5" toAlpha="0.5" duration=".5" order="6"/>
+										<Alpha fromAlpha="0.5" toAlpha="1"   duration=".1" order="7"/>
+										<Alpha fromAlpha="1"   toAlpha="1  " duration=".5" order="8"/>
+										<Alpha fromAlpha="1"   toAlpha="0.5" duration=".1" order="9"/>
+										<Alpha fromAlpha="0.5" toAlpha="0.5" duration=".5" order="10"/>
+										<Alpha fromAlpha="0.5" toAlpha="1"   duration=".1" order="11"/>
+									</AnimationGroup>
+								</Animations>
+							</Button>
+						
+						
+						</Frames>
+					</Frame>
+					<Frame alpha="0.0" parentKey="Flash">
+						<Anchors>
+							<Anchor point="TOPLEFT" />
+							<Anchor point="BOTTOMRIGHT" />
+						</Anchors>
+						<Frames>
+							<Frame parentKey="sub">
+								<Anchors>
+									<Anchor point="TOPLEFT" />
+									<Anchor point="BOTTOMRIGHT" />
+								</Anchors>
+								<Animations>
+									<AnimationGroup parentKey="flash" looping="NONE">
+										<Scripts>
+											<OnPlay>self:GetParent():GetParent():SetAlpha(0.5)</OnPlay>
+											<OnFinished>self:GetParent():GetParent():SetAlpha(0)</OnFinished>
+										</Scripts>
+										<Alpha parentKey="flashPre" duration="0" fromAlpha="1" toAlpha="0"  />
+										<Alpha parentKey="flashIn" duration="0.0" smoothing="IN" fromAlpha="0" toAlpha="1"  />
+										<Alpha parentKey="flashOut" duration="1.0" smoothing="OUT" fromAlpha="1" toAlpha="0"  />
+									</AnimationGroup>
+								</Animations>
+								<Layers />
+							</Frame>
+						</Frames>
+					</Frame>
+
+					<Button parentKey="DefaultStateButton" inherits="BackdropTemplate">
+						<Scripts>
+							<OnLoad>self:RegisterForClicks("LeftButtonUp","RightButtonUp") self:RegisterForDrag("LeftButton")</OnLoad>
+						</Scripts>
+					</Button>
+
+					<ScrollFrame parentKey="Scroll" hidden="true">
+						<Anchors>
+							<Anchor point="TOPLEFT" />
+							<Anchor point="BOTTOMRIGHT" />
+						</Anchors>
+						<Frames>
+							<Slider parentKey="Bar" inherits="UIPanelScrollBarTemplate">
+								<Anchors>
+									<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" x="0" y="-16" />
+									<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="0" y="16" />
+								</Anchors>
+								<Scripts>
+									<OnValueChanged>ZGV.Frame.Scroll_Slider_OnValueChanged(self)</OnValueChanged>
+								</Scripts>
+							</Slider>
+						</Frames>
+						<ScrollChild>
+							<Frame setAllPoints="true" parentKey="StepContainer" clipChildren="true">
+								<Size x="300" y="50" />
+							</Frame>
+						</ScrollChild>
+						<Scripts>
+							<OnUpdate>ZGV.Frame.Scroll_OnUpdate(self,elapsed)</OnUpdate>
+						</Scripts>
+					</ScrollFrame>
+				</Frames>
+			</Frame>
+			<Frame frameLevel="110" hidden="true" parentKey="ThinFlash" inherits="BackdropTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeKey="$parent.Scroll" relativePoint="TOPLEFT" x="-18" y="18" />
+					<Anchor point="BOTTOMRIGHT" relativeKey="$parent.Scroll" relativePoint="BOTTOMRIGHT" x="18" y="-18" />
+				</Anchors>
+				<Animations>
+					<AnimationGroup parentKey="flash" looping="NONE">
+						<Scripts>
+							<OnPlay>self:GetParent():SetAlpha(1)</OnPlay>
+							<OnFinished>self:GetParent():SetAlpha(0)</OnFinished>
+						</Scripts>
+						<Animation parentKey="flashOut" duration="0.4" smoothing="OUT">
+							<Scripts>
+								<OnUpdate>self:GetRegionParent():SetAlpha(1-self:GetSmoothProgress())</OnUpdate>
+							</Scripts>
+						</Animation>
+					</AnimationGroup>
+				</Animations>
+
+			</Frame>
+
+			<!-- Template: Menu used in goal rightclick -->
+			<Frame parentKey="Menu" inherits="UIDropDownForkTemplate" hidden="true" />
+
+			<Frame hidden="true" parentKey="MenuHostSettings" inherits="UIDropDownForkTemplate" enableMouse="true"></Frame>
+			<Frame hidden="true" parentKey="MenuHostAdditional" inherits="UIDropDownForkTemplate" enableMouse="true"></Frame>
+			<Frame hidden="true" parentKey="MenuHostGuides" inherits="UIDropDownForkTemplate" enableMouse="true"></Frame>
+
+			<Frame parentKey="ResizerLeft" frameLevel="100" mixin="ZGV_ResizerMixin">
+				<KeyValues><KeyValue key="ResizerDir" value="LEFT" type="string"/></KeyValues>
+				<Size x="6" y="6" />
+				<Anchors>
+					<Anchor point="TOP" relativePoint="TOPLEFT" />
+					<Anchor point="BOTTOM" relativePoint="BOTTOMLEFT" />
+				</Anchors>
+				<Scripts>
+					<OnLoad method="OnLoad" />
+				</Scripts>
+			</Frame>
+			<Frame parentKey="ResizerRight" frameLevel="100" mixin="ZGV_ResizerMixin">
+				<KeyValues><KeyValue key="ResizerDir" value="RIGHT" type="string"/></KeyValues>
+				<Size x="6" y="6" />
+				<Anchors>
+					<Anchor point="TOP" relativePoint="TOPRIGHT" x="1" y="0" />
+					<Anchor point="BOTTOM" relativePoint="BOTTOMRIGHT" x="1" y="0" />
+				</Anchors>
+				<Scripts>
+					<OnLoad method="OnLoad" />
+				</Scripts>
+			</Frame>
+			<Frame parentKey="ResizerBottom" frameLevel="100" mixin="ZGV_ResizerMixin">
+				<KeyValues><KeyValue key="ResizerDir" value="BOTTOM" type="string"/></KeyValues>
+				<Size x="10" y="10" />
+				<!-- will anchor in code -->
+				<Scripts>
+					<OnLoad method="OnLoad" />
+				</Scripts>
+			</Frame>
+			<Frame parentKey="ResizerBottomLeft" frameLevel="101" mixin="ZGV_ResizerMixin">
+				<KeyValues><KeyValue key="ResizerDir" value="BOTTOMLEFT" type="string"/></KeyValues>
+				<Size x="10" y="10" />
+				<!-- will anchor in code -->
+				<Scripts>
+					<OnLoad method="OnLoad" />
+				</Scripts>
+			</Frame>
+			<Frame parentKey="ResizerBottomRight" frameLevel="101" mixin="ZGV_ResizerMixin">
+				<KeyValues><KeyValue key="ResizerDir" value="BOTTOMRIGHT" type="string"/></KeyValues>
+				<Size x="10" y="10" />
+				<!-- will anchor in code -->
+				<Scripts>
+					<OnLoad method="OnLoad" />
+				</Scripts>
+			</Frame>
+
+		</Frames>
+	</Frame>
+
+</Ui>
