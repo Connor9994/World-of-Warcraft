@@ -1,0 +1,6 @@
+## Title: Def's Camera Zoom
+## Interface: 30400
+## Notes: Increases the camera zoom beyond the slider's maximum.
+## Author: Defective
+## Version: 30400.1
+Def's Camera Zoom_Wrath.lua

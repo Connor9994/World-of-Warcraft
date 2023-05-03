@@ -1,0 +1,21 @@
+## Interface: 100007
+## Title: Macro Toolkit
+## Notes: Enhanced macro frame with additional tools
+## Notes-zhTW: 增強巨集UI，方便編寫巨集並加強功能
+## Notes-esES: Marco de macros mejorado con herramientas adicionales
+## Author: Deepac, marciowb, The_Junksterr, Numy
+## Version: v2.0.2
+## SavedVariables: MacroToolkitDB
+## OptionalDeps: ElvUI, Ace3
+## X-Curse-Project-ID: 47117
+
+#@no-lib-strip@
+# Libraries
+embeds.xml
+#@end-no-lib-strip@
+
+libs\LibAdvancedIconSelector-MTK\LibAdvancedIconSelector-MTK.xml
+locales\locales.xml
+modules\modules.xml
+MacroToolkit.xml
+MacroToolkit.lua

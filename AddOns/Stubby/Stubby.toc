@@ -1,0 +1,21 @@
+## Title: Stubby |cff224477(lib)
+## Notes: Allows AddOns to load automatically, and provides event handling support.
+##
+## Interface: 100005
+## OptionalDeps: !nLog, DebugLib
+## SavedVariables: StubbyConfig
+##
+## Version: 9.1.BETA.5.11 (OneMawTime)
+## Revision: $Id$
+## Author: Norganna's AddOns
+## X-Part-Of: Libraries
+## X-Category: Library
+## X-Max-Interface: 80100
+## X-URL: http://zip.norganna.org/libs/Stubby/
+## X-Feedback: http://forums.norganna.org
+##
+Support\Load.xml
+
+Libs\Load.xml
+Stubby.lua
+Stubby.xml

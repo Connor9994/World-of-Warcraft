@@ -1,0 +1,10 @@
+## Interface: 20504
+## Author: Deepac
+## Title: MacroToolkit Icon Data
+## Version: v2.0.2
+## Notes: Load on demand data for MacroToolkit
+## LoadOnDemand: 1
+## RequiredDeps: MacroToolkit
+## X-Curse-Project-ID: 47117
+
+..\MacroToolkit\modules\textures.lua

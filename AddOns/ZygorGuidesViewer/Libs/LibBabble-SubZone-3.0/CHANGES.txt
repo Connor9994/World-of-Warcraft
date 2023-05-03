@@ -1,0 +1,28 @@
+------------------------------------------------------------------------
+r238 | arithmandar | 2021-06-28 15:51:08 +0000 (Mon, 28 Jun 2021) | 1 line
+Changed paths:
+   M /trunk/LibBabble-SubZone-3.0.lua
+   M /trunk/LibBabble-SubZone-3.0_deDE.lua
+   M /trunk/LibBabble-SubZone-3.0_esES.lua
+   M /trunk/LibBabble-SubZone-3.0_frFR.lua
+   M /trunk/LibBabble-SubZone-3.0_zhTW.lua
+
+and more
+------------------------------------------------------------------------
+r237 | arithmandar | 2021-06-28 14:50:02 +0000 (Mon, 28 Jun 2021) | 1 line
+Changed paths:
+   M /trunk/LibBabble-SubZone-3.0.lua
+   M /trunk/LibBabble-SubZone-3.0_deDE.lua
+   M /trunk/LibBabble-SubZone-3.0_esES.lua
+   M /trunk/LibBabble-SubZone-3.0_esMX.lua
+   M /trunk/LibBabble-SubZone-3.0_frFR.lua
+   M /trunk/LibBabble-SubZone-3.0_itIT.lua
+   M /trunk/LibBabble-SubZone-3.0_koKR.lua
+   M /trunk/LibBabble-SubZone-3.0_ptBR.lua
+   M /trunk/LibBabble-SubZone-3.0_ruRU.lua
+   M /trunk/LibBabble-SubZone-3.0_zhCN.lua
+   M /trunk/LibBabble-SubZone-3.0_zhTW.lua
+
+added JournalInstance and Scenaiors zones
+------------------------------------------------------------------------
+

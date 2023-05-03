@@ -1,0 +1,23 @@
+## Interface: 100002
+## Title: |cffffffffZygor Guide Viewer|r |cffc20436(Dragonflight)|r
+## Notes: Free multi-purpose leveling guide viewer.
+## Author: Zygor Guides
+## DefaultState: enabled
+## LoadOnDemand: 0
+## SavedVariables: ZygorGuidesViewerSettings
+## - SavedVariablesPerCharacter: ZygorGuidesViewerSettingsChar
+## OptionalDeps: Cartographer, Cartographer3, TomTom, WorldQuestTracker
+## X-Category: 
+## X-Credits: 
+## X-eMail: zygor@zygorguides.com
+## X-Website: http://zygorguides.com/
+## X-License: GPL
+## Version: 9.0
+
+Libs\Libs.xml
+Libs-Retail\Libs.xml
+
+Retrofit.lua
+Localization\Localization.xml
+
+files-Retail.xml

@@ -1,0 +1,122 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/ D:\UI.xsd">
+
+	<CheckButton name="ZygorGuidesViewerMaintenanceFrame_But" inherits="UICheckButtonTemplate" virtual="true">
+		<Scripts>
+			<OnShow>  self.text:SetText(self.txt or "?")  </OnShow>
+			<OnClick>  ZGV.db.char[self.var] = not not self:GetChecked()  </OnClick>
+			<OnEnter>  GameTooltip:SetOwner(self, "ANCHOR_TOP")  GameTooltip:SetText(self.tip or "?")  GameTooltip:Show()  </OnEnter>
+			<OnLeave>  GameTooltip:Hide()  </OnLeave>
+		</Scripts>
+	</CheckButton>
+
+
+	<Frame name="ZygorGuidesViewerMaintenanceFrame" toplevel="true" frameStrata="DIALOG" movable="true" enableMouse="true" hidden="true" parent="UIParent">
+		<Size x="300" y="400"/>
+		<Anchors><Anchor point="CENTER"/></Anchors>
+		<!--
+		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<BackgroundInsets>
+				<AbsInset left="11" right="12" top="12" bottom="11"/>
+			</BackgroundInsets>
+			<TileSize val="32"/>
+			<EdgeSize val="32"/>
+		</Backdrop>
+		-->
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture name="$parent_FrameHeader" file="Interface\DialogFrame\UI-DialogBox-Header">
+					<Anchors><Anchor point="TOP"><Offset x="0" y="12"/></Anchor></Anchors>
+				</Texture>
+				<FontString inherits="GameFontNormal" text="Zygor Guides Maintenance">
+					<Anchors><Anchor point="TOP" relativeTo="$parent_FrameHeader"><Offset x="0" y="-14"/></Anchor></Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+
+			<CheckButton name="$parent_But01" inherits="ZygorGuidesViewerMaintenanceFrame_But"><Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT"><Offset x="20" y="-27"/></Anchor></Anchors></CheckButton>
+			<CheckButton name="$parent_But02" inherits="ZygorGuidesViewerMaintenanceFrame_But"><Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent_But01"><Offset x="0" y="-25"/></Anchor></Anchors></CheckButton>
+			<CheckButton name="$parent_But03" inherits="ZygorGuidesViewerMaintenanceFrame_But"><Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent_But02"><Offset x="0" y="-25"/></Anchor></Anchors></CheckButton>
+			<CheckButton name="$parent_But04" inherits="ZygorGuidesViewerMaintenanceFrame_But"><Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent_But03"><Offset x="0" y="-25"/></Anchor></Anchors></CheckButton>
+			<CheckButton name="$parent_But05" inherits="ZygorGuidesViewerMaintenanceFrame_But"><Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent_But04"><Offset x="0" y="-25"/></Anchor></Anchors></CheckButton>
+			<CheckButton name="$parent_But06" inherits="ZygorGuidesViewerMaintenanceFrame_But"><Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent_But05"><Offset x="0" y="-25"/></Anchor></Anchors></CheckButton>
+			<CheckButton name="$parent_But07" inherits="ZygorGuidesViewerMaintenanceFrame_But"><Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent_But06"><Offset x="0" y="-25"/></Anchor></Anchors></CheckButton>
+			<CheckButton name="$parent_But08" inherits="ZygorGuidesViewerMaintenanceFrame_But"><Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent_But07"><Offset x="0" y="-25"/></Anchor></Anchors></CheckButton>
+			<CheckButton name="$parent_But09" inherits="ZygorGuidesViewerMaintenanceFrame_But"><Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent_But08"><Offset x="0" y="-25"/></Anchor></Anchors></CheckButton>
+			<CheckButton name="$parent_But10" inherits="ZygorGuidesViewerMaintenanceFrame_But"><Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent_But09"><Offset x="0" y="-25"/></Anchor></Anchors></CheckButton>
+			<CheckButton name="$parent_But11" inherits="ZygorGuidesViewerMaintenanceFrame_But"><Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent_But10"><Offset x="0" y="-25"/></Anchor></Anchors></CheckButton>
+			<CheckButton name="$parent_But12" inherits="ZygorGuidesViewerMaintenanceFrame_But"><Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent_But11"><Offset x="0" y="-25"/></Anchor></Anchors></CheckButton>
+			<CheckButton name="$parent_But13" inherits="ZygorGuidesViewerMaintenanceFrame_But"><Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent_But12"><Offset x="0" y="-25"/></Anchor></Anchors></CheckButton>
+
+
+
+
+			<!--
+			<Button name="$parent_Reload" inherits="GameMenuButtonTemplate" text="Reload">
+				<Anchors><Anchor point="BOTTOM" relativePoint="BOTTOM"><Offset x="0" y="20"/></Anchor></Anchors>
+				<Scripts>
+					<OnClick>
+						ReloadUI()
+					</OnClick>
+				</Scripts>
+			</Button>
+			-->
+
+			<Button name="$parent_CloseButton" inherits="UIPanelCloseButton">
+				<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPRIGHT"><Offset x="10" y="7"/></Anchor></Anchors>
+			</Button>
+
+			<Button name="$parent_Bug" inherits="GameMenuButtonTemplate" text="Bug Report">
+				<Anchors><Anchor point="BOTTOM" relativePoint="BOTTOM"><Offset x="0" y="15"/></Anchor></Anchors>
+				<Scripts>
+					<OnClick>
+						ZGV:BugReport(true)
+					</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="$parentText" inherits="GameFontHighlightSmall" text="" justifyH="LEFT" justifyV="TOP">
+					<Size x="280" y="0"/>
+					<Anchors><Anchor point="BOTTOM" relativePoint="BOTTOM"><Offset x="0" y="40"/></Anchor></Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>
+				_G[self:GetName().."Text"]:SetText("Try to enable the above options one by one.\nIf the game disconnects or crashes right after enabling one of the options, please start the game again, enter Maintenance Mode again, and submit a Bug Report using the button below - and be sure to report which options were enabled properly, and which caused the disconnection or crash.");
+
+				local name='ZygorGuidesViewerMaintenanceFrame'
+				
+				local but
+				
+				local n=0
+
+				local function addbut(var,txt,tip)
+					n=n+1
+					local but=_G[name..("_But%02d"):format(n)]
+					but.var = var
+					but.txt = txt
+					but.tip = tip
+				end
+
+				addbut("maint_dostartup"				,"STARTUP: startup loop","CHECK THIS FIRST.")
+				addbut("maint_startup_01"				,"STARTUP: 01"  ,"Primary startup...")
+				addbut("maint_startup_pointer"		,"STARTUP: pointer"  ,"")
+				addbut("maint_startup_modules"		,"STARTUP: modules"  ,"")
+				addbut("maint_startup_loadguides"	,"STARTUP: load guides"			,"")
+				addbut("maint_startup_final"			,"STARTUP: final"					,"")
+				addbut("maint_startup_startguide"	,"STARTUP: start guide"			,"")
+				addbut("maint_enableprogressbar"			,"progressbar"			,"")
+				addbut("maint_fetchquestdata"			,"quest data"			,"")
+				addbut("maint_fetchitemdata"			,"item data"			,"")
+
+				for n=1,30 do but=_G[name..("_But%02d"):format(n)]  if but and not but.var then but:Hide() end end
+
+			</OnLoad>
+		</Scripts>
+	</Frame>
+
+
+</Ui>

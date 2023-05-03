@@ -1,0 +1,15 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+	<Script file="NPCModels.lua"/>
+	<Script file="NPCModelsExtra.lua"/>
+	<Script file="NPCModels_parse.lua"/>
+	<Script file="ObjectModels.lua"/>
+	<Script file="ObjectModelsExtra.lua"/>
+	<Script file="DisplayModelsExtra.lua"/>
+	<Script file="PetModels.lua"/>
+	<Script file="NPCData.lua"/>
+	<Include file="Gold\files.xml"/>
+	<Script file="QuestDBData.lua"/>
+	<Script file="Foglight.lua"/>
+	<Script file="Dungeons.lua"/>
+</Ui>

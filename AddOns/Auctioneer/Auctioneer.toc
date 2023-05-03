@@ -1,0 +1,39 @@
+## Title: Auctioneer Core |cff774422(DF edition)
+## Notes: Auctioneer assists players to track item values on the Auction House; whether buying or selling.
+##
+## Interface: 100005
+## LoadOnDemand: 0
+## Dependencies: Stubby
+## OptionalDependencies: !nLog, SlideBar, Configator, Babylonian, DebugLib, TipHelper, LibExtraTip, LibDataBroker
+## SavedVariables: AuctioneerConfig, AuctioneerData, AuctioneerServers
+## SavedVariablesPerCharacter: AuctioneerLocal
+##
+## Version: 9.1.BETA.5.11 (OneMawTime)
+## Revision: $Id$
+## Author: Norganna's AddOns
+## X-Part-Of: Auctioneer
+## X-Category: Auction House
+## X-Max-Interface: 100005
+## X-URL: http://auctioneeraddon.com/
+## X-Feedback: https://auctioneeraddon.com/slack
+##
+
+## Load our libs before anything.
+Libs\Load.xml
+
+## Setup the main variables / structure.
+Main.lua
+
+## Boot up the various bits and pieces...
+Const.lua
+Internal.lua
+Handlers.lua
+Statistics.lua
+Items.lua
+GUI.lua
+
+## Finish up the boot process and register Load events.
+Register.lua
+
+## Load up any of our active modules now.
+Modules\Active.xml

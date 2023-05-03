@@ -1,0 +1,519 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\FrameXML\UI.xsd">
+
+<Script file="Localization.lua" />
+<Script file="Archaeology.lua" />
+<Script file="Wowhead_Looter.lua" />
+
+
+<GameTooltip name="wlGameTooltip" frameStrata="TOOLTIP" hidden="true" inherits="GameTooltipTemplate">
+    <Scripts>
+        <OnLoad>
+            self:SetOwner(WorldFrame, "ANCHOR_NONE");
+        </OnLoad>
+    </Scripts>
+</GameTooltip>
+
+
+<Frame name="wlDebugFrame" toplevel="true" frameStrata="DIALOG" movable="true" enableMouse="true" hidden="true" parent="UIParent" inherits="BackdropTemplate">
+    <Size>
+        <AbsDimension x="450" y="600" />
+    </Size>
+    <Anchors>
+        <Anchor point="CENTER" />
+    </Anchors>
+
+    <!--
+    <TitleRegion>
+        <Size>
+            <AbsDimension x="150" y="32" />
+        </Size>
+        <Anchors>
+            <Anchor point="TOP">
+                <Offset>
+                    <AbsDimension x="0" y="12" />
+                </Offset>
+            </Anchor>
+        </Anchors>
+    </TitleRegion>
+    -->
+
+    <KeyValues>
+        <KeyValue key="backdropInfo" value="BACKDROP_DIALOG_32_32" type="global"/>
+    </KeyValues>
+
+    <Layers>
+        <Layer level="ARTWORK">
+            <Texture file="Interface\DialogFrame\UI-DialogBox-Header">
+                <Size>
+                    <AbsDimension x="300" y="64" />
+                </Size>
+                <Anchors>
+                    <Anchor point="TOP">
+                        <Offset>
+                            <AbsDimension x="0" y="12" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Texture>
+
+            <FontString inherits="GameFontNormal" text="WL_NAME">
+                <Anchors>
+                    <Anchor point="TOP">
+                        <Offset>
+                            <AbsDimension x="0" y="-2" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </FontString>
+
+            <Texture file="Interface\AddOns\+Wowhead_Looter\wowhead-logo-64.blp">
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT">
+                        <Offset>
+                            <AbsDimension x="20" y="-14" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Texture>
+        </Layer>
+    </Layers>
+
+    <Frames>
+        <ScrollFrame name="wlTextScrollFrame" inherits="UIPanelScrollFrameTemplate">
+            <Size>
+                <AbsDimension x="384" y="510" />
+            </Size>
+            <Anchors>
+                <Anchor point="TOPLEFT">
+                    <Offset>
+                        <AbsDimension x="23" y="-35" />
+                    </Offset>
+                </Anchor>
+            </Anchors>
+
+            <ScrollChild>
+                <Frame name="wlTextChildFrame" enableMouse="true">
+                    <Size>
+                        <AbsDimension x="384" y="510" />
+                    </Size>
+                    <Anchors>
+                        <Anchor point="TOPLEFT">
+                            <Offset>
+                                <AbsDimension x="0" y="0" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+
+                    <Frames>
+                        <EditBox name="wlDebugEdit" enableMouse="true" multiline="true" autoFocus="false">
+                            <Size>
+                                <AbsDimension x="384" y="510" />
+                            </Size>
+                            <Anchors>
+                                <Anchor point="TOPLEFT">
+                                    <Offset>
+                                        <AbsDimension x="0" y="0" />
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+
+                            <FontString inherits="ChatFontNormal" />
+
+                            <Scripts>
+                                <OnEscapePressed>
+                                    wlDebugEdit:ClearFocus();
+                                </OnEscapePressed>
+                                <OnTextChanged>
+                                    ScrollingEdit_OnTextChanged(self, wlTextScrollFrame);
+                                </OnTextChanged>
+                                <OnCursorChanged>
+                                    ScrollingEdit_OnCursorChanged(self, x, y, w, h);
+                                </OnCursorChanged>
+                                <OnUpdate>
+                                    ScrollingEdit_OnUpdate(self, elapsed, wlTextScrollFrame);
+                                </OnUpdate>
+                            </Scripts>
+
+                        </EditBox>
+                    </Frames>
+                </Frame>
+            </ScrollChild>
+        </ScrollFrame>
+
+        <Button inherits="UIPanelButtonTemplate" text="Clear">
+            <Size>
+                <AbsDimension x="75" y="25" />
+            </Size>
+            <Anchors>
+                <Anchor point="BOTTOMRIGHT">
+                    <Offset>
+                        <AbsDimension x="-105" y="20" />
+                    </Offset>
+                </Anchor>
+            </Anchors>
+            <Scripts>
+                <OnClick>
+                    wlDebugEdit:SetText("");
+                </OnClick>
+            </Scripts>
+        </Button>
+
+        <Button inherits="UIPanelButtonTemplate" text="Close">
+            <Size>
+                <AbsDimension x="75" y="25" />
+            </Size>
+            <Anchors>
+                <Anchor point="BOTTOMRIGHT">
+                    <Offset>
+                        <AbsDimension x="-20" y="20" />
+                    </Offset>
+                </Anchor>
+            </Anchors>
+            <Scripts>
+                <OnClick>
+                    self:GetParent():Hide();
+                </OnClick>
+            </Scripts>
+        </Button>
+
+    </Frames>
+
+    <Scripts>
+        <OnShow>
+            wlDebugEdit:ClearFocus();
+        </OnShow>
+    </Scripts>
+</Frame>
+
+
+<Frame name="wlPopupFrame" toplevel="true" frameStrata="DIALOG" movable="true" enableMouse="true" hidden="true" parent="UIParent" inherits="BackdropTemplate">
+    <Size>
+        <AbsDimension x="450" y="135" />
+    </Size>
+    <Anchors>
+        <Anchor point="CENTER" />
+    </Anchors>
+
+    <!--
+    <TitleRegion>
+        <Size>
+            <AbsDimension x="150" y="32" />
+        </Size>
+        <Anchors>
+            <Anchor point="TOP">
+                <Offset>
+                    <AbsDimension x="0" y="12" />
+                </Offset>
+            </Anchor>
+        </Anchors>
+    </TitleRegion>
+    -->
+
+    <KeyValues>
+        <KeyValue key="backdropInfo" value="BACKDROP_DIALOG_32_32" type="global"/>
+    </KeyValues>
+
+    <Layers>
+        <Layer level="ARTWORK">
+            <Texture file="Interface\DialogFrame\UI-DialogBox-Header">
+                <Size>
+                    <AbsDimension x="300" y="64" />
+                </Size>
+                <Anchors>
+                    <Anchor point="TOP">
+                        <Offset>
+                            <AbsDimension x="0" y="12" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Texture>
+
+            <FontString inherits="GameFontNormal" text="WL_NAME">
+                <Anchors>
+                    <Anchor point="TOP">
+                        <Offset>
+                            <AbsDimension x="0" y="-2" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </FontString>
+
+            <FontString name="$parentCaption" inherits="GameFontNormal" justifyH="LEFT" text="">
+                <Color r="1" g="1" b="1" a="1" />
+                <Size>
+                    <AbsDimension x="394" y="28" />
+                </Size>
+                <Anchors>
+                    <Anchor point="CENTER">
+                        <Offset>
+                            <AbsDimension x="0" y="28" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </FontString>
+
+            <Texture file="Interface\AddOns\+Wowhead_Looter\wowhead-logo-64.blp">
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT">
+                        <Offset>
+                            <AbsDimension x="20" y="-14" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Texture>
+        </Layer>
+    </Layers>
+
+    <Frames>
+
+        <EditBox name="$parentEdit" enableMouse="true" autoFocus="false">
+            <Size>
+                <AbsDimension x="394" y="28" />
+            </Size>
+            <Anchors>
+                <Anchor point="CENTER">
+                    <Offset>
+                        <AbsDimension x="0" y="0" />
+                    </Offset>
+                </Anchor>
+            </Anchors>
+
+            <Layers>
+                <Layer level="BACKGROUND">
+                    <Texture name="$parentLeft" file="Interface\ChatFrame\UI-ChatInputBorder-Left">
+                        <Size>
+                            <AbsDimension x="256" y="32"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="LEFT">
+                                <Offset>
+                                    <AbsDimension x="-10" y="0"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <TexCoords left="0" right="1.0" top="0" bottom="1.0"/>
+                    </Texture>
+                    <Texture name="$parentRight" file="Interface\ChatFrame\UI-ChatInputBorder-Right">
+                        <Size>
+                            <AbsDimension x="75" y="32"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="RIGHT">
+                                <Offset>
+                                    <AbsDimension x="10" y="0"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <TexCoords left="0.70703125" right="1.0" top="0" bottom="1.0"/>
+                    </Texture>
+                    <Texture file="Interface\ChatFrame\UI-ChatInputBorder-Left">
+                        <Size>
+                            <AbsDimension x="5" y="32"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="LEFT" relativeTo="$parentLeft" relativePoint="RIGHT">
+                                <Offset>
+                                    <AbsDimension x="0" y="0"/>
+                                </Offset>
+                            </Anchor>
+                            <Anchor point="RIGHT" relativeTo="$parentRight" relativePoint="LEFT">
+                                <Offset>
+                                    <AbsDimension x="0" y="0"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <TexCoords left="0.29296875" right="1.0" top="0" bottom="1.0"/>
+                    </Texture>
+                </Layer>
+            </Layers>
+
+            <FontString inherits="ChatFontNormal" />
+
+            <Scripts>
+                <OnEscapePressed>
+                    self:GetParent():Hide();
+                </OnEscapePressed>
+            </Scripts>
+
+        </EditBox>
+
+        <Button inherits="UIPanelButtonTemplate" text="Close">
+            <Size>
+                <AbsDimension x="75" y="25" />
+            </Size>
+            <Anchors>
+                <Anchor point="BOTTOMRIGHT">
+                    <Offset>
+                        <AbsDimension x="-20" y="20" />
+                    </Offset>
+                </Anchor>
+            </Anchors>
+            <Scripts>
+                <OnClick>
+                    self:GetParent():Hide();
+                </OnClick>
+            </Scripts>
+        </Button>
+    </Frames>
+
+    <Scripts>
+        <OnShow>
+            wlPopupFrameEdit:SetFocus();
+            wlPopupFrameEdit:HighlightText(0);
+        </OnShow>
+    </Scripts>
+</Frame>
+
+
+<Frame name="wlLocMapFrame" frameStrata="HIGH" movable="false" enableMouse="false" parent="WorldMapFrame" hidden="true" inherits="TooltipBackdropTemplate">
+    <Size>
+        <AbsDimension x="1" y="28" />
+    </Size>
+
+    <KeyValues>
+        <KeyValue key="backdropColor" value="BLACK_FONT_COLOR" type="global"/>
+        <KeyValue key="backdropColorAlpha" value="0.75" type="number"/>
+    </KeyValues>
+
+    <Layers>
+        <Layer level="OVERLAY">
+            <FontString name="$parentText" inherits="GameFontNormal" text="" />
+            <FontString name="$parentText" inherits="GameFontNormal" text="">
+                <Anchors>
+                    <Anchor point="CENTER">
+                        <Offset>
+                            <AbsDimension x="0" y="1" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </FontString>
+        </Layer>
+    </Layers>
+
+    <Scripts>
+        <OnLoad inherit="prepend" function="wlLocMapFrame_OnLoad" />
+        <OnUpdate function="wlLocMapFrame_OnUpdate" />
+    </Scripts>
+</Frame>
+
+
+<Frame name="wlLocTooltipFrame" frameStrata="MEDIUM" movable="true" clampedToScreen="true" enableMouse="true" hidden="true" parent="UIParent" inherits="TooltipBackdropTemplate">
+    <!--
+    <TitleRegion>
+        <Size>
+            <AbsDimension x="500" y="500" />
+        </Size>
+        <Anchors>
+            <Anchor point="CENTER" />
+        </Anchors>
+    </TitleRegion>
+    -->
+
+    <Size>
+        <AbsDimension x="1" y="25" />
+    </Size>
+
+    <Anchors>
+        <Anchor point="CENTER" />
+    </Anchors>
+
+    <KeyValues>
+        <KeyValue key="backdropColor" value="BLACK_FONT_COLOR" type="global"/>
+        <KeyValue key="backdropColorAlpha" value="0.5" type="number"/>
+    </KeyValues>
+
+    <Layers>
+        <Layer level="OVERLAY">
+            <FontString name="$parentText" inherits="GameFontNormal" text="">
+                <Anchors>
+                    <Anchor point="CENTER">
+                        <Offset>
+                            <AbsDimension x="0" y="1" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </FontString>
+        </Layer>
+    </Layers>
+
+    <Scripts>
+        <OnUpdate function="wlLocTooltipFrame_OnUpdate" />
+        <OnLoad inherit="prepend">
+                self:RegisterForDrag("LeftButton")
+        </OnLoad>
+        <OnDragStart>
+                if not self.isLocked then
+                    self:StartMoving()
+                end
+        </OnDragStart>
+        <OnDragStop>
+                self:StopMovingOrSizing()
+        </OnDragStop>
+    </Scripts>
+</Frame>
+
+
+<Frame name="wlIdTooltipFrame" frameStrata="MEDIUM" movable="true" clampedToScreen="true" enableMouse="true" hidden="true" parent="UIParent" inherits="TooltipBackdropTemplate">
+    <!--
+    <TitleRegion>
+        <Size>
+            <AbsDimension x="500" y="500" />
+        </Size>
+        <Anchors>
+            <Anchor point="CENTER" />
+        </Anchors>
+    </TitleRegion>
+    -->
+
+    <Size>
+        <AbsDimension x="1" y="38" />
+    </Size>
+
+    <Anchors>
+        <Anchor point="CENTER" />
+    </Anchors>
+
+    <KeyValues>
+        <KeyValue key="backdropColor" value="BLACK_FONT_COLOR" type="global"/>
+        <KeyValue key="backdropColorAlpha" value="0.5" type="number"/>
+    </KeyValues>
+
+    <Layers>
+        <Layer level="OVERLAY">
+            <FontString name="$parentText" inherits="GameFontNormal" text="">
+                <Anchors>
+                    <Anchor point="CENTER">
+                        <Offset>
+                            <AbsDimension x="0" y="1" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </FontString>
+        </Layer>
+    </Layers>
+
+    <Scripts>
+        <OnUpdate function="wlIdTooltipFrame_OnUpdate" />
+        <OnLoad inherit="prepend">
+            self:RegisterForDrag("LeftButton")
+        </OnLoad>
+        <OnDragStart>
+            if not self.isLocked then
+                self:StartMoving()
+            end
+        </OnDragStart>
+        <OnDragStop>
+            self:StopMovingOrSizing()
+        </OnDragStop>
+    </Scripts>
+</Frame>
+
+
+<Frame name="wlFrame" parent="UIParent" hidden="false">
+    <Scripts>
+        <OnLoad function="wl_OnLoad" />
+        <OnEvent function="wl_OnEvent" />
+    </Scripts>
+</Frame>
+
+</Ui>

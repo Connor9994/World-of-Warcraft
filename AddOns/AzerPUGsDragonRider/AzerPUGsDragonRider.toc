@@ -1,0 +1,10 @@
+## Interface: 100007
+## Title: |cFF00FFFF AzerPUG's|r |cFFFF00FFDragonRider|r
+## Notes: AzerPUG's Dragon Rider
+## SavedVariables: ChangeLogData VigorFrameScale VigorFramePosition VigorFrameAutoHide HideSideWings VigorFrameAutoHideInWrongZone AZPHideGlyphs AZPLockPosition AZPHideRostrums
+
+## IconTexture: Interface\Icons\Ability_DragonRiding_Glyph01
+## AddonCompartmentFunc: AZPDragonRiderOnAddonCompartmentClick
+
+AzerPUGsDragonRider.lua
+MapIcons.xml

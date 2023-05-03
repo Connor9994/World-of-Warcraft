@@ -1,0 +1,13 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/FrameXML/UI.xsd">
+	<Script file="StackSizes.lua" />
+
+	<Script file="Scan.lua" />
+
+	<Script file="Auctiontools-Core.lua" />
+	<Script file="Auctiontools-Data.lua" />
+	<Script file="Auctiontools-View.lua" />
+	<Script file="Auctiontools-Buy.lua" />
+	<Script file="Auctiontools-Sell.lua" />
+	<Script file="Auctiontools-Help.lua" />
+
+</Ui>

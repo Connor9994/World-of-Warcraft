@@ -1,0 +1,264 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/ D:\UI.xsd">
+
+	<Button name="ZygorGuidesViewerPointerMinimapMarker" virtual="true" hidden="false" movable="false" enableMouse="true">
+		<Size x="20" y="20"/>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture parentKey="icon" file="__\Arrows\Cloqwerk\minimaparrow-green-dot">
+					<Size x="12" y="12"/>
+					<Anchors><Anchor point="CENTER" relativePoint="CENTER" /></Anchors>
+				</Texture>
+				<Texture parentKey="arrow" hidden="true" file="__\Arrows\Cloqwerk\minimaparrow-green-edge">
+					<Size x="40" y="40"/>
+					<Anchors><Anchor point="CENTER" relativePoint="CENTER" /></Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+	</Button>
+
+	<Button name="ZygorGuidesViewerPointerWorldMapMarker" virtual="true" hidden="false" movable="false" enableMouse="true">
+		<Size x="25" y="25"/>
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture parentKey="icon" file="__\Arrows\Cloqwerk\minimaparrow-green-dot" setAllPoints="0">
+					<Size x="25" y="25"/>
+					<Anchors><Anchor point="CENTER" relativePoint="CENTER" /></Anchors>
+				</Texture>
+				<FontString inherits="SystemFont_Small" name="$parentLabel" parentKey="label" justifyH="LEFT">
+					<Size x="0" y="16" />
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="CENTER" />
+					</Anchors>
+					<Color r="1.0" g="1.0" b="1.0" />
+				</FontString>
+				<Texture file="__\Skins\loading" name="$parentSpinner" parentKey="spinner">
+					<Anchors><Anchor point="CENTER" relativePoint="CENTER" x="-0.5" y="0.5" /></Anchors>
+					<Size x="23" y="23"/>
+				</Texture>
+			</Layer>
+		</Layers>
+
+		<Scripts>
+			<OnShow> self.Loop:Play() </OnShow>
+			<OnHide> self.Loop:Stop() </OnHide>
+		</Scripts>
+
+		<Animations>
+			<AnimationGroup parentKey="Loop" looping="REPEAT" >
+				<Rotation target="$parentSpinner" order="1" duration="2" degrees="-360" />
+			</AnimationGroup>
+			<AnimationGroup parentKey="zoomy" looping="BOUNCE">
+				<Animation duration="1.0" smoothing="IN" order="1">
+					<Scripts>
+						<OnPlay>
+							-- ONLY for step 1
+							self.f = self:GetRegionParent().icon
+						</OnPlay>
+						<OnUpdate>
+							self.f:SetWidth(25 + self:GetSmoothProgress()*3)
+							self.f:SetHeight(25 + self:GetSmoothProgress()*3)
+						</OnUpdate>
+						<OnFinished>
+							self.f:SetWidth(25)
+							self.f:SetHeight(25)
+						</OnFinished>
+					</Scripts>
+				</Animation>
+			</AnimationGroup>
+			<AnimationGroup parentKey="zoom" looping="NONE">
+				<Scale scaleX="1.2" scaleY="1.2" duration="0.5" smoothing="OUT" order="1">
+					<Origin point="CENTER"/>
+				</Scale>
+				<Scale scaleX="1.0" scaleY="1.0" duration="5.0" smoothing="NONE" order="2">
+					<Origin point="CENTER"/>
+				</Scale>
+			</AnimationGroup>
+			<AnimationGroup parentKey="unzoom" looping="NONE">
+				<Scale scaleX="1.2" scaleY="1.2" duration="0.0" smoothing="NONE" order="1">
+					<Origin point="CENTER"/>
+				</Scale>
+				<Scale scaleX="0.8" scaleY="0.8" duration="0.5" smoothing="IN" order="2">
+					<Origin point="CENTER"/>
+				</Scale>
+				<Scale scaleX="1.0" scaleY="1.0" duration="5.0" smoothing="NONE" order="3">
+					<Origin point="CENTER"/>
+				</Scale>
+			</AnimationGroup>
+		</Animations>
+	</Button>
+
+	<Frame name="ZygorGuidesViewerPointerMinimapAnt" virtual="true" hidden="false" movable="false" enableMouse="false">
+		<Size x="20" y="20"/>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture parentKey="icon" file="__\Arrows\Cloqwerk\minimaparrow-green-dot">
+					<Size x="12" y="12"/>
+					<Anchors><Anchor point="CENTER" relativePoint="CENTER" /></Anchors>
+				</Texture>
+				<Texture parentKey="arrow" hidden="true" file="__\Arrows\Cloqwerk\minimaparrow-green-edge">
+					<Size x="40" y="40"/>
+					<Anchors><Anchor point="CENTER" relativePoint="CENTER" /></Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+	</Frame>
+
+	<Frame name="ZygorGuidesViewerPointerWorldMapAnt" virtual="true" hidden="false" movable="false" enableMouse="false">
+		<Size x="25" y="25"/>
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture parentKey="icon" file="__\Arrows\Cloqwerk\minimaparrow-green-dot" setAllPoints="0">
+					<Size x="25" y="25"/>
+					<Anchors><Anchor point="CENTER" relativePoint="CENTER" /></Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+	</Frame>
+
+
+	<Frame name="ZygorGuidesViewerPointer_ArrowCtrl" movable="true" hidden="false">
+		<Size x="1" y="1"/>
+		<Anchors><Anchor point="CENTER"><Offset x="0" y="200"/></Anchor></Anchors>
+		<Scripts>
+			<!--<OnLoad>self:SetUserPlaced(true) </OnLoad>-->
+		</Scripts>
+	</Frame>
+
+
+	<!-- taxi markers! -->
+
+	<Frame name="ZygorGuidesViewerPointerTaxiMapMarker" virtual="true" hidden="false" movable="false" enableMouse="true">
+		<Size x="25" y="25"/>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture parentKey="icon" file="__\Arrows\Cloqwerk\minimaparrow-green-dot">
+					<Anchors><Anchor point="CENTER" relativePoint="CENTER" /></Anchors>
+					<Size x="25" y="25"/>
+				</Texture>
+			</Layer>
+		</Layers>
+	</Frame>
+
+	<Frame name="ZygorGuidesViewerPointerTaxiMapAnt" virtual="true" hidden="false" movable="false" enableMouse="false">
+		<Size x="25" y="25"/>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture parentKey="icon" file="__\Arrows\Cloqwerk\minimaparrow-green-dot">
+					<Anchors><Anchor point="CENTER" relativePoint="CENTER" /></Anchors>
+					<Size x="25" y="25"/>
+				</Texture>
+			</Layer>
+		</Layers>
+	</Frame>
+
+	<Frame name="ZygorGuidesViewer_MapLineTemplate" virtual="true">
+		<Layers>
+			<Layer level="BACKGROUND" textureSubLevel="-2">
+				<Line parentKey="Fill" atlas="_UI-Taxi-Line-horizontal" alpha="1" />
+			</Layer>
+			<Layer level="OVERLAY" textureSubLevel="-1">
+				<Line parentKey="FillScroll1" parentArray="FillScrolls" file="Interface/Artifacts/_Artifacts-DependencyBar-FillScroll1" thickness="12" hWrapMode="REPEAT" alphaMode="ADD" alpha="1" hidden="true" />
+				<Line parentKey="FillScroll2" parentArray="FillScrolls" file="Interface/Artifacts/_Artifacts-DependencyBar-FillScroll2" thickness="12" hWrapMode="REPEAT" alphaMode="ADD" alpha="1" hidden="true" />
+			</Layer>
+		</Layers>
+		<Animations>
+			<AnimationGroup parentKey="ScrollAnim" setToFinalAlpha="true" looping="REPEAT">
+				<TextureCoordTranslation parentKey="TexCT" childKey="Fill" duration="2" order="1" offsetU="-1" offsetV="0" />
+			</AnimationGroup>
+			<AnimationGroup parentKey="ScrollAnim2" setToFinalAlpha="true" looping="REPEAT">
+				<TextureCoordTranslation parentKey="TexCT1" childKey="Fill" duration="4" order="1" offsetU="-2" offsetV="0" />
+				<TextureCoordTranslation parentKey="TexCT2" childKey="FillScroll1" duration="4" order="1" offsetU="-3" offsetV="0" />
+			</AnimationGroup>
+			<AnimationGroup parentKey="RevealAnim" setToFinalAlpha="true">
+				<Alpha parentKey="Alpha" childKey="Fill" duration=".15" fromAlpha="0" toAlpha=".85" order="1" smoothing="OUT" />
+				<LineScale parentKey="Scale" childKey="Fill" smoothing="IN" duration=".15" order="1" fromScaleX="0.001" fromScaleY="1" toScaleX="1" toScaleY="1">
+					<Origin point="LEFT" x="1" y="0" />
+				</LineScale>
+				<LineScale parentKey="Scale" childKey="Fill" smoothing="IN" duration=".15" order="2" fromScaleX="1" fromScaleY="1" toScaleX="0.001" toScaleY="1">
+					<Origin point="RIGHT" x="1" y="0" />
+				</LineScale>
+				<Alpha parentKey="Alpha2" childKey="Fill" duration=".15" fromAlpha=".85" toAlpha="0" order="2" smoothing="IN" />
+			</AnimationGroup>
+		</Animations>
+	</Frame>
+
+	<Frame name="ZygorGuidesViewer_TaxiMarker_Template" virtual="true" mixin="ZygorGuidesViewer_TaxiMarker_Mixin">
+		<Size x="5" y="5"/>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture parentKey="icon">
+					<Anchors><Anchor point="BOTTOM" relativePoint="CENTER" x="0" y="0" /></Anchors>
+					<Size x="25" y="25"/>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Animations>
+			<AnimationGroup parentKey="fadein" setToFinalAlpha="true">
+				<Scale childKey="icon" duration="0.1" order="1" smoothing="OUT" scaleX="3" scaleY="3" />
+				<Scale childKey="icon" duration="0.6" order="2" smoothing="OUT" scaleX="0.33" scaleY="0.33" />
+				<Alpha childKey="icon" duration="0.6" order="2" smoothing="OUT" fromAlpha="0" toAlpha="1" />
+				<Scripts>
+					<OnPlay>self:GetParent().icon:SetAlpha(0)</OnPlay>
+				</Scripts>
+			</AnimationGroup>
+			<AnimationGroup parentKey="here" looping="REPEAT">
+				<Translation childKey="icon" duration="0.3" order="1" smoothing="OUT" offsetX="0" offsetY="15"/>
+				<Translation childKey="icon" duration="0.3" order="2" smoothing="IN" offsetX="0" offsetY="-15"/>
+			</AnimationGroup>
+			<AnimationGroup parentKey="fadeout" setToFinalAlpha="true">
+				<Alpha childKey="icon" duration="1" order="1" fromAlpha="1" toAlpha="0" />
+			</AnimationGroup>
+		</Animations>
+		<Scripts>
+			<OnLoad method="OnLoad" />
+		</Scripts>
+	</Frame>
+
+	<Button name="ZygorGuidesViewer_ArrowMenu_Destination" virtual="true" inherits="UIDropDownCustomMenuEntryTemplate" mixin="ZygorGuidesViewer_ArrowMenu_Destination_Mixin">
+		<Size x="200" y="36" />
+		<Layers>
+			<Layer level="OVERLAY" textureSubLevel="-1">
+				<Texture parentKey="icon">
+					<Size x="40" y="40" />
+					<Anchors>
+						<Anchor point="TOPLEFT" />
+					</Anchors>
+				</Texture>			
+				<FontString parentKey="text" justifyH="LEFT" spacing="3" justifyV="MIDDLE">
+					<Size x="160" y="40" />
+					<Anchors>
+						<Anchor point="LEFT" relativeKey="$parent.icon" relativePoint="RIGHT" x="3" y="0" />
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnClick method="OnClick" />
+		</Scripts>
+	</Button>
+
+
+	<Frame name="ZygorPinTemplate" mixin="CorpsePinMixin" enableMouse="true" hidden="true" virtual="true">
+		<Size x="16" y="16"/>
+		<Anchors>
+			<Anchor point="CENTER"/>
+		</Anchors>
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture file="Interface\Minimap\POIIcons" setAllPoints="true">
+					<TexCoords left="0.56640625" right="0.6328125" top="0.001953125" bottom="0.03515625"/>
+				</Texture>
+			</Layer>
+		</Layers>
+	</Frame>
+
+
+	<Frame name="ZygorFogLightPinTemplate" mixin="ZygorFogLightPinMixin" virtual="true">
+		<Scripts>
+			<OnUpdate method="OnUpdate" />
+		</Scripts>
+	</Frame>
+
+	<Frame name="ZygorWorldQuestPinTemplate" inherits="WorldQuestPinTemplate" mixin="WorldMap_WorldQuestPinMixin" virtual="true"/>
+
+</Ui>

@@ -1,0 +1,6 @@
+## Title: Def's Camera Zoom
+## Interface: 11403
+## Notes: Increases the camera zoom beyond the slider's maximum.
+## Author: Defective
+## Version: 11403.1
+Def's Camera Zoom_Vanilla.lua

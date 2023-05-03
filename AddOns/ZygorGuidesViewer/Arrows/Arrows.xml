@@ -1,0 +1,13 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/FrameXML/UI.xsd">
+
+	<Script file="Arrows.lua"/>
+	<!-- arrows -->
+	<Include file="Stealth\Arrow.xml"/>
+	<Include file="Starlight\Arrow.xml"/>
+	<!--
+	<Include file="SharpFat\Arrow.xml"/>
+	<Include file="RoundFlat\Arrow.xml"/>
+	<Include file="ToonFlat\Arrow.xml"/>
+	<Include file="Jigsaw\Arrow.xml"/>
+	-->
+</Ui>

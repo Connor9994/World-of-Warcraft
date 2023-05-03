@@ -1,0 +1,113 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/FrameXML/UI.xsd">
+
+	<Script file="Arrow.lua"/>
+
+	<Button name="ZygorGuidesViewerFrame_Arrow_Stealth_Template" virtual="true" hidden="false" movable="true" enableMouse="false" frameStrata="MEDIUM" clampedToScreen="true" mixin="ZygorGuidesViewerFrame_Arrow_Stealth_Mixin">
+		<Size x="50" y="50"/>
+		<Anchors>
+			<Anchor point="CENTER" relativePoint="CENTER" />
+		</Anchors>
+		<Layers>
+			<!--
+			<Layer level="BACKGROUND">
+				<Texture parentKey="back" file="shadow" opacity="0.5">
+					<Size x="90" y="60"/>
+					<Anchors>
+						<Anchor point="CENTER" relativePoint="CENTER" ><Offset x="0" y="0"/></Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+			-->
+			<Layer level="ARTWORK" textureSubLevel="3">
+				<Texture parentKey="special" nonBlocking="false">
+					<KeyValues>
+						<KeyValue key="TextureTemplate" value="$./specials" type="string"/>
+					</KeyValues>
+					<Size x="40" y="40"/>
+					<Anchors> <Anchor point="CENTER" relativePoint="CENTER" /> </Anchors>
+					<Animations>
+						<AnimationGroup parentKey="here" looping="REPEAT">
+							<Translation duration="0.3" order="1" smoothing="OUT" offsetX="0" offsetY="15"><Scripts><OnPlay>local me=self:GetRegionParent() ; me:SetSize(40,40)  me:SetTexCoord(0.0,0.25,0.0,0.5)</OnPlay></Scripts></Translation>
+							<Translation duration="0.3" order="2" smoothing="IN" offsetX="0" offsetY="-15"><Scripts><OnPlay>local me=self:GetRegionParent() ; me:SetSize(40,40)  me:SetTexCoord(0.0,0.25,0.0,0.5)</OnPlay></Scripts></Translation>
+						</AnimationGroup>
+						<AnimationGroup parentKey="upstairs"> <!-- bfa alpha change looping="ONCE" -->
+							<Translation duration="10.0" order="1"><Scripts><OnPlay>local me=self:GetRegionParent() ; me:SetSize(60,60)  me:SetTexCoord(0.25,0.5,0.0,0.5)</OnPlay></Scripts></Translation>
+						</AnimationGroup>
+						<AnimationGroup parentKey="downstairs"> <!-- bfa alpha change looping="ONCE" -->
+							<Translation duration="10.0" order="1"><Scripts><OnPlay>local me=self:GetRegionParent() ; me:SetSize(60,60)  me:SetTexCoord(0.25,0.5,0.5,1.0)</OnPlay></Scripts></Translation>
+						</AnimationGroup>
+						<AnimationGroup parentKey="waiting" looping="REPEAT">
+							<Rotation duration="1.0" degrees="-360" order="1"><Scripts><OnPlay>local me=self:GetRegionParent() ; me:SetSize(40,40)  me:SetTexCoord(0.0,0.25,0.5,1.0)</OnPlay></Scripts></Rotation>
+						</AnimationGroup>
+						<AnimationGroup parentKey="error" looping="REPEAT">
+							<Translation duration="10.0" order="1"><Scripts><OnPlay>local me=self:GetRegionParent() ; me:SetSize(40,40)  me:SetTexCoord(0.50,0.75,0.0,0.5)</OnPlay></Scripts></Translation>
+						</AnimationGroup>
+						<AnimationGroup parentKey="instance" looping="REPEAT">
+							<Translation duration="10.0" order="1"><Scripts><OnPlay>local me=self:GetRegionParent() ; me:SetSize(40,40)  me:SetTexCoord(0.75,1,0.0,0.5)</OnPlay></Scripts></Translation>
+						</AnimationGroup>
+						<AnimationGroup parentKey="instancehide" looping="REPEAT">
+							<Translation duration="10.0" order="1"><Scripts><OnPlay>local me=self:GetRegionParent() ; me:SetSize(40,40)  me:SetTexCoord(0.75,1,0.5,1.0)</OnPlay></Scripts></Translation>
+						</AnimationGroup>
+					</Animations>
+				</Texture>
+			</Layer>
+
+			<Layer level="ARTWORK" textureSubLevel="3">
+				<FontString parentKey="title" justifyH="CENTER" justifyV="TOP" inherits="GameFontHighlightSmall">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="BOTTOM"><Offset x="0" y="3"/></Anchor>
+					</Anchors>
+					<Size x="200" y="0"/>
+					<FontHeight val="10"/>
+				</FontString>
+			</Layer>
+		</Layers>
+
+		<Frames>
+			<Frame parentKey="arrow" hidden="true">
+				<Size x="50" y="33" />
+				<Anchors>
+					<Anchor point="CENTER" relativePoint="CENTER" />
+				</Anchors>
+				<Layers>
+					<Layer level="ARTWORK" textureSubLevel="1">
+						<Texture parentKey="arr" setAllPoints="true" nonBlocking="false" mixin="Zygor_SpriteTexture_Mixin">
+							<KeyValues>
+								<KeyValue key="TextureTemplate" value="$./arrow" type="string"/>
+							</KeyValues>
+						</Texture>
+						<Texture parentKey="arrspecular" setAllPoints="true" alphaMode="ADD" nonBlocking="false" mixin="Zygor_SpriteTexture_Mixin">
+							<KeyValues>
+								<KeyValue key="TextureTemplate" value="$./arrow-specular" type="string"/>
+							</KeyValues>
+						</Texture>
+					</Layer>
+				</Layers>
+				<Animations>
+					<AnimationGroup parentKey="turn" looping="NONE">
+						<Rotation parentKey="anim" degrees="360" duration="0" smoothing="NONE" order="1" />
+						<Translation duration="10.0" smoothing="NONE" order="2"><Scripts><OnPlay>self:GetParent():Pause()</OnPlay></Scripts></Translation>
+					</AnimationGroup>
+					<AnimationGroup parentKey="redflash"> <!-- bfa alpha change looping="ONCE" -->
+						<Animation parentKey="redf" duration="0.5" smoothing="OUT" order="2">
+							<Scripts>
+								<OnUpdate>
+									local pro=self:GetSmoothProgress()
+									self:GetRegionParent().arr:SetVertexColor(1.0,1.0-pro,1.0-pro)
+								</OnUpdate>
+							</Scripts>
+						</Animation>
+					</AnimationGroup>
+				</Animations>
+			</Frame>
+		</Frames>
+
+		<Scripts>
+			<OnLoad method="OnLoad" />
+			<OnDragStart method="OnDragStart" />
+			<OnDragStop method="OnDragStop"/>
+			<OnShow method="OnShow"/>
+			<OnMouseWheel method="OnMouseWheel"/>
+		</Scripts>
+	</Button>
+</Ui>
