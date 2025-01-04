@@ -8,16 +8,20 @@ def write_counter(file_path, count):
     with open(file_path, 'w') as f:
         f.write(str(count))
 
-def commit_changes(date,FILE_PATH):
+def commit_changes(date, file_path):
     # Set GIT_COMMITTER_DATE for the commit date
     os.environ['GIT_COMMITTER_DATE'] = date.strftime('%Y-%m-%d %H:%M:%S')
     os.environ['GIT_AUTHOR_DATE'] = date.strftime('%Y-%m-%d %H:%M:%S')
     
     # Stage the file
-    subprocess.run(['git', 'add', FILE_PATH])
+    subprocess.run(['git', 'add', file_path])
     
     # Commit changes
     subprocess.run(['git', 'commit', '-m', 'Increment counter'])
+
+def push_changes():
+    # Push changes to remote repository
+    subprocess.run(['git', 'push'])
 
 def main():
     # Constants
@@ -31,18 +35,21 @@ def main():
 
     while current_date <= END_DATE:
 
-        # Get a random number of commits for the current day (between 1 and 8)
+        # Get a random number of commits for the current day (between 1 and 16)
         num_commits = random.randint(2, 16)
         print(f"Committing {num_commits} times on {current_date.strftime('%Y-%m-%d')}")
 
         for _ in range(num_commits):
             write_counter(FILE_PATH, counter)
-            commit_changes(START_DATE,FILE_PATH)
-            print(f"Committed '{counter}' for date: {START_DATE.strftime('%Y-%m-%d %H:%M:%S')}")
+            commit_changes(current_date, FILE_PATH)
+            print(f"Committed '{counter}' for date: {current_date.strftime('%Y-%m-%d %H:%M:%S')}")
             counter += 1
 
+        # Push changes to GitHub after committing for the day
+        push_changes()
+
         # Move to the next day
-        START_DATE += timedelta(days=1)
+        current_date += timedelta(days=1)
 
 if __name__ == '__main__':
     main()
