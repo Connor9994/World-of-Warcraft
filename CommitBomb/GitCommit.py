@@ -1,5 +1,6 @@
 import os
 import subprocess
+import random
 from datetime import datetime, timedelta
 
 def write_counter(file_path, count):
@@ -22,13 +23,23 @@ def main():
     # Constants
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
     FILE_PATH = 'counter.txt'  # Path to your text file
-    START_DATE = datetime(2022, 1, 1)  # Start date for commits
-    NUMBER_OF_COMMITS = 30  # Define how many commits you want to backfill
+    START_DATE = datetime(2018, 1, 1)  # Start date for commits
+    END_DATE = datetime(2025, 1, 4)    # End date for commits
 
-    for count in range(1, NUMBER_OF_COMMITS + 1):
-        write_counter(FILE_PATH, count)
-        commit_changes(START_DATE,FILE_PATH)
-        print(f"Committed '{count}' for date: {START_DATE.strftime('%Y-%m-%d %H:%M:%S')}")
+    current_date = START_DATE
+    counter = 1
+
+    while current_date <= END_DATE:
+
+        # Get a random number of commits for the current day (between 1 and 8)
+        num_commits = random.randint(2, 16)
+        print(f"Committing {num_commits} times on {current_date.strftime('%Y-%m-%d')}")
+
+        for _ in range(num_commits):
+            write_counter(FILE_PATH, counter)
+            commit_changes(START_DATE,FILE_PATH)
+            print(f"Committed '{counter}' for date: {START_DATE.strftime('%Y-%m-%d %H:%M:%S')}")
+            counter += 1
 
         # Move to the next day
         START_DATE += timedelta(days=1)
